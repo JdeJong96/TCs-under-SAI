@@ -5,7 +5,6 @@ from kerchunk.netCDF3 import NetCDF3ToZarr
 from kerchunk.combine import MultiZarrToZarr
 import numpy as np
 import dask.bag
-from virtualizarr import open_virtual_dataset
 import xarray as xr
 
 
@@ -40,9 +39,10 @@ def open_mfdataset(filepaths: list[str], ncstore_dir: str='~/kerchunk', verbose=
     filepaths = sorted([os.path.abspath(fp) for fp in filepaths])
     if len(filepaths) == 1: # use xr.open_dataset directly if there is one file
         return xr.open_dataset(filepaths[0], **kwargs)
-    
+
     # set default keyword arguments for xr.open_dataset on NC_STORE file
-    required_kw = {'engine':'kerchunk', 'storage_options':{'target_protocol':'file'}}
+    #required_kw = {'engine':'kerchunk', 'storage_options':{'target_protocol':'file'}} # seems to be causing issues
+    required_kw = {'engine':'kerchunk'}
     for (k,v) in required_kw.items():
         if k in kwargs:
             print(f'open_mfdataset(): ignoring keyword {k}')
@@ -51,14 +51,15 @@ def open_mfdataset(filepaths: list[str], ncstore_dir: str='~/kerchunk', verbose=
     # create NC_STORE filename from netCDF filename, including timestamp
     # of first and last file. Open and return dataset if the file already exists
     ncstore_dir = os.path.expanduser(ncstore_dir)
-    os.makedirs(ncstore_dir, exist_ok=True)
     fparts = os.path.basename(filepaths[0]).split('.')
     fpartsf = os.path.basename(filepaths[-1]).split('.')
     fparts[-2] = f'{fparts[-2]}_{fpartsf[-2]}' # time string
     fparts[-1] = 'json' # extension
     ncstorefile = '.'.join(fparts)
     ncstore_path = os.path.join(ncstore_dir, ncstorefile)
-    if os.path.exists(ncstore_path):
+    if not os.path.exists(ncstore_dir):
+        os.mkdir(ncstore_dir)
+    elif os.path.exists(ncstore_path):
         if verbose:
             print(f"Reading combined kerchunk reference file {ncstore_path}")
         return xr.open_dataset(ncstore_path, **kwargs)
@@ -78,54 +79,6 @@ def open_mfdataset(filepaths: list[str], ncstore_dir: str='~/kerchunk', verbose=
         f.write(json.dumps(mzz.translate()).encode())
     
     return xr.open_dataset(ncstore_path, **kwargs)
-
-
-# def open_mfdataset_virtualizarr(filepaths: list[str], ncstore_dir: str='~/kerchunk', verbose=True, **kwargs):
-#     """Alternative to the above using virtualizarr, works better for POP files"""
-
-#     # make sorted list of absolute filepaths
-#     if isinstance(filepaths, str):
-#         filepaths = glob.glob(filepaths)
-#     filepaths = sorted([os.path.abspath(fp) for fp in filepaths])
-#     if len(filepaths) == 1: # use xr.open_dataset directly if there is one file
-#         return xr.open_dataset(filepaths[0], **kwargs)
-
-#     # create NC_STORE filename from netCDF filename, including timestamp
-#     # of first and last file. Open and return dataset if the file already exists
-#     ncstore_dir = os.path.expanduser(ncstore_dir)
-#     os.makedirs(ncstore_dir, exist_ok=True)
-#     fparts = os.path.basename(filepaths[0]).split('.')
-#     fpartsf = os.path.basename(filepaths[-1]).split('.')
-#     fparts[-2] = f'{fparts[-2]}_{fpartsf[-2]}' # time string
-#     fparts[-1] = 'json' # extension
-#     ncstorefile = '.'.join(fparts)
-#     ncstore_path = os.path.join(ncstore_dir, ncstorefile)
-#     if os.path.exists(ncstore_path):
-#         if verbose:
-#             print(f"Reading combined kerchunk reference file {ncstore_path}")
-#         return xr.open_dataset(ncstore_path, **kwargs)
-
-#     virtual_dsets = []
-#     for file in filepaths:
-#         virtual_ds = open_virtual_dataset(file, decode_times=True)
-#         virtual_dsets.append(virtual_ds)
-
-#     if verbose:
-#         print(f"Writing combined kerchunk reference file {ncstore_path}")
-#     combined_ds = xr.combine_nested(virtual_dsets, concat_dim='time',
-#         compat='override', data_vars='minimal', coords='minimal')
-#     combined_ds.virtualize.to_kerchunk(ncstore_path, format='json')
-
-#     return xr.open_dataset(ncstore_path, **kwargs)
-
-
-def open_mfdataset_POP(files, **kwargs):
-    """alternative to kerchunk which is better suited for POP data"""
-    bag = dask.bag.from_sequence(files)
-    dsets = bag.map(xr.open_dataset, **kwargs).persist()
-    dset = xr.concat(dsets, dim='time', compat='override', 
-        coords='minimal', data_vars='minimal', join='exact')
-    return dset
 
 
 class Cases:
@@ -228,15 +181,7 @@ class Cases:
     def open_mfdataset(self, *args, **kwargs):
         '''Open netCDF files, wrapper for load_SAIdata.open_mfdataset'''
         assert isinstance(self.files, list), 'attempted to open dataset without selecting a model component and file stream'
-        if self.model_component == 'ocn':
-            return open_mfdataset_POP(self.files, *args, **kwargs)
-        else:
-            return open_mfdataset(self.files, *args, **kwargs)
-
-
-    # def open_mfdataset_virtualizarr(self, *args, **kwargs):
-    #     assert isinstance(self.files, list), 'attempted to open dataset without selecting a model component and file stream'
-    #     return open_mfdataset_virtualizarr(self.files, *args, **kwargs)
+        return open_mfdataset(self.files, *args, **kwargs)
 
 
     def _nc_info(self):
