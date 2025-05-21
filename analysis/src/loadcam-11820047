@@ -1,0 +1,153 @@
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.001.cam2.h1.2002-12-01-10800_2012-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.001.cam2.h1.2092-12-02-00000_2097-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.001.cam2.h2.2092-12-01-21600_2097-12-19-43200.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.001.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.001.cam2.h2.2092-12-01-10800_2097-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.001.cam2.h4.2092-12-01-10800_2097-12-01-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.001.cam2.h1.2092-12-01-10800_2097-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.001.cam2.h5.2092-12-01-10800_2097-12-01-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.001.cam2.h2.2002-12-01-10800_2012-12-31-10800.json
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.002.cam2.h1.2002-12-01-10800_2007-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.002.cam2.h1.2092-12-02-00000_2097-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.002.cam2.h2.2092-12-01-21600_2097-12-19-43200.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.002.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 79, in open_mfdataset
+    f.write(json.dumps(mzz.translate()).encode())
+                       ^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 649, in translate
+    self.second_pass()
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 508, in second_pass
+    cv = tuple(sorted(set(cv)))[0]
+         ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.002.cam2.h2.2092-12-01-10800_2098-01-10-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.002.cam2.h2.2002-12-01-10800_2007-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.002.cam2.h4.2092-12-01-10800_2097-12-01-10800.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 79, in open_mfdataset
+    f.write(json.dumps(mzz.translate()).encode())
+                       ^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 649, in translate
+    self.second_pass()
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 508, in second_pass
+    cv = tuple(sorted(set(cv)))[0]
+         ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.002.cam2.h1.2092-12-01-10800_2098-01-10-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.002.cam2.h5.2092-12-01-10800_2097-12-01-10800.json
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.003.cam2.h1.2002-12-01-10800_2007-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.003.cam2.h1.2092-12-02-00000_2097-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.003.cam2.h2.2092-12-01-21600_2097-12-19-43200.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.003.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.003.cam2.h2.2002-12-01-10800_2007-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.003.cam2.h2.2092-12-01-10800_2098-01-30-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.003.cam2.h4.2092-12-01-10800_2097-12-01-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.003.cam2.h1.2092-12-01-10800_2098-01-30-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.003.cam2.h5.2092-12-01-10800_2097-12-01-10800.json
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.004.cam2.h1.2002-12-01-10800_2007-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.004.cam2.h1.2092-12-02-00000_2097-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.004.cam2.h2.2092-12-01-21600_2097-12-19-43200.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.004.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 79, in open_mfdataset
+    f.write(json.dumps(mzz.translate()).encode())
+                       ^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 649, in translate
+    self.second_pass()
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 508, in second_pass
+    cv = tuple(sorted(set(cv)))[0]
+         ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.004.cam2.h2.2092-12-01-10800_2098-01-20-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.004.cam2.h2.2002-12-01-10800_2007-12-31-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.004.cam2.h4.2092-12-01-10800_2097-12-01-10800.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 79, in open_mfdataset
+    f.write(json.dumps(mzz.translate()).encode())
+                       ^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 649, in translate
+    self.second_pass()
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 508, in second_pass
+    cv = tuple(sorted(set(cv)))[0]
+         ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.004.cam2.h1.2092-12-01-10800_2098-01-20-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.004.cam2.h5.2092-12-01-10800_2097-12-01-10800.json
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.005.cam2.h1.2002-12-01-10800_2008-02-24-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.005.cam2.h1.2092-12-02-00000_2097-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.005.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.005.cam2.h2.2092-12-01-21600_2097-12-19-43200.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 79, in open_mfdataset
+    f.write(json.dumps(mzz.translate()).encode())
+                       ^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 649, in translate
+    self.second_pass()
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 508, in second_pass
+    cv = tuple(sorted(set(cv)))[0]
+         ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.005.cam2.h2.2092-12-01-10800_2098-01-10-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.005.cam2.h2.2002-12-01-10800_2008-02-24-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.005.cam2.h4.2092-12-01-10800_2097-12-01-10800.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 79, in open_mfdataset
+    f.write(json.dumps(mzz.translate()).encode())
+                       ^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 649, in translate
+    self.second_pass()
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/combine.py", line 508, in second_pass
+    cv = tuple(sorted(set(cv)))[0]
+         ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.005.cam2.h1.2092-12-01-10800_2098-01-10-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.005.cam2.h5.2092-12-01-10800_2097-12-01-10800.json
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2002-12_without_SAI.001.cam2.h1.2002-12-02-00000_2007-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12_without_SAI.001.cam2.h1.2092-12-02-00000_2097-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.006.cam2.h1.2092-12-02-00000_2097-12-02-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12_without_SAI.001.cam2.h2.2092-12-01-21600_2097-12-19-43200.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2002-12_without_SAI.001.cam2.h2.2002-12-01-21600_2007-12-19-43200.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.006.cam2.h2.2092-12-01-21600_2097-12-19-43200.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.006.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.006.cam2.h4.2092-12-01-10800_2097-12-01-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.006.cam2.h5.2092-12-01-10800_2097-12-01-10800.json
+
+JOB STATISTICS
+==============
+Job ID: 11820047
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 14:50:08 core-walltime
+Job Wall-clock time: 00:55:38
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 28.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
