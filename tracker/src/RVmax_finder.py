@@ -22,22 +22,22 @@ ROOT = '/home/jasperdj/TCs-under-SAI/tracker'
 run_year_start  = 2002 if experiment == 'ref' else 2092
 gridfile        = f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
 NOUT            = 8 # number of time steps per output file (one day)
-if experiment == 'ref' and run_ensemble <= 5:
+if (experiment=='ref') and (run_ensemble<=5):
 	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
 	directory_data  = f'/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/{experiment_name}/OUTPUT/atm/hist/3h/'
 	stream		  	= 'h1'
 	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
-elif experiment == 'ref' and run_ensemble==6:
+elif (experiment=='ref') and (run_ensemble==6):
     experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_2002-12_without_SAI.001'
     directory_data  = f'/projects/0/nwo2021025/archive/{experiment_name}/atm/hist/'
     stream		  	= 'h5'
 	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
-elif experiment == 'rcp' and run_ensemble <= 5:
+elif (experiment=='rcp') and (run_ensemble<=5):
 	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
 	directory_data  = f'/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/{experiment_name}/OUTPUT/atm/hist/3h/'
 	stream		  	= 'h1'
 	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
-elif experiment == 'rcp' and run_ensemble==6:
+elif (experiment=='rcp') and (run_ensemble==6):
     experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_2092-12_without_SAI.001'
     directory_data  = f'/projects/0/nwo2021025/archive/{experiment_name}/atm/hist/'
     stream		  	= 'h5'
