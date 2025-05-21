@@ -114,7 +114,7 @@ def open_track_dataset(datadir, fix_gaps=False):
 
 
 def main():
-    ds = open_track_dataset('/home/jasperdj/files_rene/')
+    ds = open_track_dataset('../../tracker/data/')
     result = xr.DataArray([0,0,0], coords=[('x',[0,1,2])])
     print(f'{result=}')
     tasks = [
