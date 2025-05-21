@@ -2,7 +2,7 @@
 #SBATCH -c 192 # adjust depending on # of unfinished tasks (dry run RV_max_finder)
 #SBATCH -p genoa
 #SBATCH -t 2:00:00  # processing 1 year of data takes 52min on 64 cores
-#SBATCH -o RVmax_finder.log.sai-%j
+#SBATCH -o RVmax_finder.log.ref-%j
 
 source ~/.bashrc
 conda activate geo
