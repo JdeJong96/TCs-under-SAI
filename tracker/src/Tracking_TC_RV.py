@@ -8,7 +8,7 @@ Call this script with
 	>> python Tracking_TC_RV.py exp ens
 where 
 	exp : [ref, rcp, sai], high-res CESM experiment
-	ens : [1,2,...,5], ensemble member
+	ens : [1,2,...,6], ensemble member
 """
 
 import os
@@ -23,8 +23,9 @@ from scipy.interpolate import interp1d
 
 experiment = sys.argv[1]  # run this script like python Tracking_TC_RV.py rcp 1
 run_ensemble = int(sys.argv[2])
+ROOT = '/home/jasperdj/TCs-under-SAI/tracker'
 
-if experiment == 'ref':
+if (experiment == 'ref') and (run_ensemble<=5):
 	run_year_start	= 2002
 	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
 	ddir			= '/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/'+experiment_name+'/OUTPUT'
@@ -33,13 +34,28 @@ if experiment == 'ref':
 					   'ocn':ddir+'/ocn/hist/daily'}
 	stream			= 'h1' # file stream with 3 hourly instantaneous variables
 	stream_prec		= 'h2' # file stream with 3 hourly average precipitation
-	directory		= f'/home/jasperdj/files_rene/RCP.started_{run_year_start}.{run_ensemble:03d}'
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
+	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}'
+	gridfile		= f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
 	RVSEARCHRADIUS = 200 # (km) search radius for TC at previous time step
 	NOUT			= 8 # number of time steps per day
 	time_slice 		= ('2003-01-01','2008-01-01') # time period to analyse
 	outfile			= f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
-elif experiment == 'rcp':
+elif (experiment=='ref') and (run_ensemble==6):
+    run_year_start  = 2002
+    experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_{run_year_start}-12_without_SAI.001'
+    ddir            = '/projects/0/nwo2021025/archive/'+experiment_name
+    datadir         = {'atm': ddir+'/atm/hist',
+                       'atm_mon': ddir+'/atm/hist',
+                       'ocn':ddir+'/ocn/hist'}
+    stream          = 'h5' # file stream with 3 hourly instantaneous variables
+    stream_prec     = 'h3' # file stream with 6 hourly average precipitation
+    directory       = f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}'
+    gridfile        = f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
+    RVSEARCHRADIUS  = 200 # (km) search radius for TC at previous time step
+    NOUT            = 8 # number of time steps per day
+    time_slice      = ('2003-01-01','2008-01-01') # time period to analyse
+    outfile         = f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
+elif (experiment == 'rcp') and (run_ensemble<=5):
 	run_year_start	= 2092
 	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
 	ddir			= '/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/'+experiment_name+'/OUTPUT'
@@ -48,12 +64,27 @@ elif experiment == 'rcp':
 					   'ocn':ddir+'/ocn/hist/daily'}
 	stream			= 'h1' # file stream with 3 hourly instantaneous variables
 	stream_prec		= 'h2' # file stream with 3 hourly average precipitation
-	directory		= f'/home/jasperdj/files_rene/RCP.started_{run_year_start}.{run_ensemble:03d}'
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
+	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}'
+	gridfile		= f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
 	RVSEARCHRADIUS = 200 # (km) search radius for TC at previous time step
 	NOUT			= 8 # number of time steps per day
 	time_slice 		= ('2093-01-01','2098-01-01') # time period to analyse
 	outfile			= f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
+elif (experiment=='rcp') and (run_ensemble==6):
+    run_year_start  = 2092
+    experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_{run_year_start}-12_without_SAI.001'
+    ddir            = '/projects/0/nwo2021025/archive/'+experiment_name
+    datadir         = {'atm': ddir+'/atm/hist',
+                       'atm_mon': ddir+'/atm/hist',
+                       'ocn':ddir+'/ocn/hist'}
+    stream          = 'h5' # file stream with 3 hourly instantaneous variables
+    stream_prec     = 'h3' # file stream with 6 hourly average precipitation
+    directory       = f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}'
+    gridfile        = f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
+    RVSEARCHRADIUS  = 200 # (km) search radius for TC at previous time step
+    NOUT            = 8 # number of time steps per day
+    time_slice      = ('2093-01-01','2098-01-01') # time period to analyse
+    outfile         = f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
 elif experiment == 'sai':
 	run_year_start	= 2092
 	experiment_name = 'hres_b.e10.B2000_CAM5.f02_t12.started_'+str(run_year_start)+'-12.'+str(run_ensemble).zfill(3)
@@ -63,8 +94,8 @@ elif experiment == 'sai':
 					   'ocn':ddir+'/ocn/hist'}
 	stream			= 'h5' # file stream with 3 hourly instantaneous variables
 	stream_prec		= 'h3' # file stream with 6 hourly average precipitation
-	directory		= '/home/jasperdj/files_rene/SAI.started_'+str(run_year_start)+'.'+str(run_ensemble).zfill(3)
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
+	directory		= f'{ROOT}/data/SAI.started_'+str(run_year_start)+'.'+str(run_ensemble).zfill(3)
+	gridfile		= f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
 	RVSEARCHRADIUS	= 200 # (km) search radius for TC at previous time step
 	NOUT			= 8 # number of time steps per day
 	time_slice 		= ('2093-01-01','2098-01-01') # time period to analyse
@@ -78,13 +109,13 @@ elif experiment == 'sai':
 #	stream			= 'h4' # 6-hourly averages
 #	stream_prec		= 'h4' # 6-hourly average precipitation
 #	stream3D		= 'h3' # only used for mres to calculate U250, V250 and T850
-#	directory		= '/home/jasperdj/files_rene/SAI.mres'
-#	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_5_DX_DY_AREA.nc'
+#	directory		= '{ROOT}/data/SAI.mres'
+#	gridfile		= '{ROOT}/data/Atmosphere_0_5_DX_DY_AREA.nc'
 #	RVSEARCHRADIUS = 400 # (km) search radius for TC at previous time step
 #	NOUT			= 4 # number of time steps per day
 #	outfile			= 'TC_tracker_results.{experiment}.nc'
 else:
-	raise ValueError(f'Incorrect experiment tag ({experiment}) provided, should be one of [rcp,sai,mres].')
+	raise ValueError(f'Incorrect options provided ({experiment=}, {run_ensemble=}) provided, experiment should be in [ref,rcp,sai], ensemble in [1-6].')
 
 
 # def chunk_data(files):
@@ -612,6 +643,7 @@ files = sorted(glob.glob(f'{datadir["atm"]}/{experiment_name}.cam2.{stream}.*.nc
 # files = files[6:373]
 #files = files[:7]; print(f'line 598 (testrun): using {len(files)} files')
 #files = files[-2:]; print(f'line 599 (testrun): using {len(files)} files')
+#files = files[-5:]; print(f'line 600 (testrun): using {len(files)} files')
 
 print(f"{len(files)=}")
 print(files[0])
