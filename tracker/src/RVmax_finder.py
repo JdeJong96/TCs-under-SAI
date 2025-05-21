@@ -16,43 +16,47 @@ dry_run			= False # set False to do computing
 
 experiment = sys.argv[1] # run with e.g. python RVmax_finder.py rcp 1
 run_ensemble = int(sys.argv[2])
+ROOT = '/home/jasperdj/TCs-under-SAI/tracker'
 
 #-----------------------------------------------------------------------------------------------------------------
-# uncomment for RCP8.5 hres data
-if experiment == 'ref':
-	run_year_start	= 2002 # [2002, 2092]
-	experiment_name = 'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_'+str(run_year_start)+'-12.'+str(run_ensemble).zfill(3)
+run_year_start  = 2002 if experiment == 'ref' else 2092
+gridfile        = f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
+NOUT            = 8 # number of time steps per output file (one day)
+if experiment == 'ref' and run_ensemble <= 5:
+	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
 	directory_data  = f'/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/{experiment_name}/OUTPUT/atm/hist/3h/'
 	stream		  	= 'h1'
-	directory		= f'/home/jasperdj/files_rene/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
-	NOUT			= 8 # number of time steps per output file (one day)
-elif experiment == 'rcp':
-	run_year_start	= 2092 # [2002, 2092]
-	experiment_name = 'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_'+str(run_year_start)+'-12.'+str(run_ensemble).zfill(3)
+	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
+elif experiment == 'ref' and run_ensemble==6:
+    experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_2002-12_without_SAI.001'
+    directory_data  = f'/projects/0/nwo2021025/archive/{experiment_name}/atm/hist/'
+    stream		  	= 'h5'
+	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
+elif experiment == 'rcp' and run_ensemble <= 5:
+	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
 	directory_data  = f'/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/{experiment_name}/OUTPUT/atm/hist/3h/'
 	stream		  	= 'h1'
-	directory		= f'/home/jasperdj/files_rene/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
-	NOUT			= 8 # number of time steps per output file (one day)
+	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
+elif experiment == 'rcp' and run_ensemble==6:
+    experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_2092-12_without_SAI.001'
+    directory_data  = f'/projects/0/nwo2021025/archive/{experiment_name}/atm/hist/'
+    stream		  	= 'h5'
+	directory		= f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
 elif experiment == 'sai':
-	run_year_start	= 2092 # [2092]
-	experiment_name = 'hres_b.e10.B2000_CAM5.f02_t12.started_'+str(run_year_start)+'-12.'+str(run_ensemble).zfill(3)
-	directory_data  = '/projects/0/nwo2021025/archive/'+experiment_name+'/atm/hist/'
+	experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
+	directory_data  = f'/projects/0/nwo2021025/archive/{experiment_name}/atm/hist/'
 	stream		  	= 'h5'
-	directory		= '/home/jasperdj/files_rene/SAI.started_'+str(run_year_start)+'.'+str(run_ensemble).zfill(3)+'/RV_Max/'
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
-	NOUT			= 8 # number of time steps per output file (one day)
+	directory		= f'{ROOT}/data/SAI.started_{run_year_start}.{run_ensemble:03d}/RV_Max/'
 else:
-	raise ValueError(f'Wrong input argument: {experiment=}')
+	raise ValueError(f'Wrong input arguments: {experiment=}, {run_ensemble=}')
 
-# # uncomment for SAI mres (0.5degree) data
+# # uncomment for SAI mres (0.5degree) data # not fully implemented yet!
 # experiment_name = 'mres_b.e10.B2000_CAM5.f05_t12.001'
 # directory_data	= '/projects/0/nwo2021025/archive/'+experiment_name+'/atm/hist/'
 # stream			= 'h4'
 # stream3D		= 'h3' # only used for mres to calculate U250, V250 and T850
-# directory		= '/home/jasperdj/files_rene/SAI.mres/RV_Max/'
-# gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_5_DX_DY_AREA.nc'
+# directory		= f'{ROOT}/data/SAI.mres/RV_Max/'
+# gridfile		= f'{ROOT}/data/Atmosphere_0_5_DX_DY_AREA.nc'
 # NOUT			= 4 # number of time steps per output file (one day)
 #-----------------------------------------------------------------------------------------------------------------
 
