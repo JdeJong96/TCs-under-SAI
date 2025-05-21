@@ -10,4 +10,4 @@ export OMP_NUM_THREADS=1 # prevent subprocesses from using paralellism
 cd /home/jasperdj/files_rene
 echo "experiment: $1"
 echo "run ensemble: $2"
-python -u RVmax_finder.seeds.py $1 $2
+python -u RVmax_finder.py $1 $2
