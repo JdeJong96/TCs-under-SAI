@@ -1,0 +1,31 @@
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2002-12_without_SAI.001.cam2.h3.2002-12-01-21600_2007-12-01-21600.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.004.cam2.h2.2092-12-01-10800_2098-01-15-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.005.cam2.h2.2092-12-01-10800_2098-01-05-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.002.cam2.h2.2092-12-01-10800_2098-01-05-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.002.cam2.h1.2092-12-01-10800_2098-01-05-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.005.cam2.h1.2092-12-01-10800_2098-01-05-10800.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.004.cam2.h1.2092-12-01-10800_2098-01-15-10800.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 147, in __init__
+    self.directory = self.cases[tag] # casedirectory
+                     ~~~~~~~~~~^^^^^
+KeyError: 'lres.cnt'
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/lres_b.e10.B2000_CAM5.f09_g16.feedforward_2050.001.cam2.h1.2000-01-01-00000_2099-01-01-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/lres_b.e10.B2000_CAM5.f09_g16.feedforward_2050.001.cam2.h2.2000-01-01-00000_2099-01-01-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/lres_b.e10.B2000_CAM5.f09_g16.feedforward_2050.001.cam2.h3.2000-01-01-00000_2099-01-01-00000.json
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/lres_b.e10.B2000_CAM5.f09_g16.feedforward_2050.001.cam2.h4.2000-01-01-00000_2099-01-01-00000.json
+
+JOB STATISTICS
+==============
+Job ID: 11991364
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 02:15:27
+CPU Efficiency: 10.53% of 21:26:24 core-walltime
+Job Wall-clock time: 01:20:24
+Memory Utilized: 12.48 GB
+Memory Efficiency: 44.57% of 28.00 GB (1.75 GB/core)
