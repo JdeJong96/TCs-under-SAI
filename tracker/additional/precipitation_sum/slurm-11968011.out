@@ -1,0 +1,663 @@
+expname='RCP8.5', run_ensemble=5, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.005.cam2.h2.2092-12-01-10800_2098-01-10-10800.json
+Traceback (most recent call last):
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 167, in <module>
+    main()
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 151, in main
+    pcip = case.select('atm',stream).open_mfdataset(decode_cf=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 65, in open_mfdataset
+    return xr.open_dataset(ncstore_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xarray/backends/api.py", line 687, in open_dataset
+    backend_ds = backend.open_dataset(
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 13, in open_dataset
+    ref_ds = open_reference_dataset(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 45, in open_reference_dataset
+    store = refs_as_store(filename_or_obj, **storage_options)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 48, in refs_as_store
+    fss = refs_as_fs(
+          ^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 29, in refs_as_fs
+    fs = fsspec.filesystem(
+         ^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/registry.py", line 310, in filesystem
+    return cls(**storage_options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/spec.py", line 81, in __call__
+    obj = super().__call__(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/implementations/reference.py", line 705, in __init__
+    text = json.load(f)
+           ^^^^^^^^^^^^
+ujson.JSONDecodeError: Expected object or value
+expname='Reference', run_ensemble=6, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2002-12_without_SAI.001.cam2.h3.2002-12-01-21600_2007-12-01-21600.json
+Traceback (most recent call last):
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 167, in <module>
+    main()
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 151, in main
+    pcip = case.select('atm',stream).open_mfdataset(decode_cf=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 65, in open_mfdataset
+    return xr.open_dataset(ncstore_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xarray/backends/api.py", line 687, in open_dataset
+    backend_ds = backend.open_dataset(
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 13, in open_dataset
+    ref_ds = open_reference_dataset(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 45, in open_reference_dataset
+    store = refs_as_store(filename_or_obj, **storage_options)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 48, in refs_as_store
+    fss = refs_as_fs(
+          ^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 29, in refs_as_fs
+    fs = fsspec.filesystem(
+         ^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/registry.py", line 310, in filesystem
+    return cls(**storage_options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/spec.py", line 81, in __call__
+    obj = super().__call__(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/implementations/reference.py", line 705, in __init__
+    text = json.load(f)
+           ^^^^^^^^^^^^
+ujson.JSONDecodeError: Expected object or value
+expname='RCP8.5', run_ensemble=4, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.004.cam2.h2.2092-12-01-10800_2098-01-20-10800.json
+Traceback (most recent call last):
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 167, in <module>
+    main()
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 151, in main
+    pcip = case.select('atm',stream).open_mfdataset(decode_cf=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 65, in open_mfdataset
+    return xr.open_dataset(ncstore_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xarray/backends/api.py", line 687, in open_dataset
+    backend_ds = backend.open_dataset(
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 13, in open_dataset
+    ref_ds = open_reference_dataset(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 45, in open_reference_dataset
+    store = refs_as_store(filename_or_obj, **storage_options)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 48, in refs_as_store
+    fss = refs_as_fs(
+          ^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 29, in refs_as_fs
+    fs = fsspec.filesystem(
+         ^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/registry.py", line 310, in filesystem
+    return cls(**storage_options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/spec.py", line 81, in __call__
+    obj = super().__call__(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/implementations/reference.py", line 705, in __init__
+    text = json.load(f)
+           ^^^^^^^^^^^^
+ujson.JSONDecodeError: Expected object or value
+expname='RCP8.5', run_ensemble=2, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.002.cam2.h2.2092-12-01-10800_2098-01-10-10800.json
+Traceback (most recent call last):
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 167, in <module>
+    main()
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/fetch_pciptrackdata.py", line 151, in main
+    pcip = case.select('atm',stream).open_mfdataset(decode_cf=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 184, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 65, in open_mfdataset
+    return xr.open_dataset(ncstore_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xarray/backends/api.py", line 687, in open_dataset
+    backend_ds = backend.open_dataset(
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 13, in open_dataset
+    ref_ds = open_reference_dataset(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 45, in open_reference_dataset
+    store = refs_as_store(filename_or_obj, **storage_options)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 48, in refs_as_store
+    fss = refs_as_fs(
+          ^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 29, in refs_as_fs
+    fs = fsspec.filesystem(
+         ^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/registry.py", line 310, in filesystem
+    return cls(**storage_options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/spec.py", line 81, in __call__
+    obj = super().__call__(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/implementations/reference.py", line 705, in __init__
+    text = json.load(f)
+           ^^^^^^^^^^^^
+ujson.JSONDecodeError: Expected object or value
+expname='SAI2050', run_ensemble=3, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.003.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 81 TCs
+writing to pcipdata/pcip_sum.sai.3.2093.nc
+year=np.int64(2094), 75 TCs
+writing to pcipdata/pcip_sum.sai.3.2094.nc
+year=np.int64(2095), 86 TCs
+writing to pcipdata/pcip_sum.sai.3.2095.nc
+year=np.int64(2096), 98 TCs
+writing to pcipdata/pcip_sum.sai.3.2096.nc
+year=np.int64(2097), 73 TCs
+writing to pcipdata/pcip_sum.sai.3.2097.nc
+expname='SAI2050', run_ensemble=6, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.006.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 73 TCs
+writing to pcipdata/pcip_sum.sai.6.2093.nc
+year=np.int64(2094), 87 TCs
+writing to pcipdata/pcip_sum.sai.6.2094.nc
+year=np.int64(2095), 100 TCs
+writing to pcipdata/pcip_sum.sai.6.2095.nc
+year=np.int64(2096), 89 TCs
+writing to pcipdata/pcip_sum.sai.6.2096.nc
+year=np.int64(2097), 72 TCs
+writing to pcipdata/pcip_sum.sai.6.2097.nc
+expname='SAI2050', run_ensemble=5, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.005.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 85 TCs
+writing to pcipdata/pcip_sum.sai.5.2093.nc
+year=np.int64(2094), 71 TCs
+writing to pcipdata/pcip_sum.sai.5.2094.nc
+year=np.int64(2095), 85 TCs
+writing to pcipdata/pcip_sum.sai.5.2095.nc
+year=np.int64(2096), 83 TCs
+writing to pcipdata/pcip_sum.sai.5.2096.nc
+year=np.int64(2097), 81 TCs
+writing to pcipdata/pcip_sum.sai.5.2097.nc
+expname='SAI2050', run_ensemble=2, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.002.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 83 TCs
+writing to pcipdata/pcip_sum.sai.2.2093.nc
+year=np.int64(2094), 89 TCs
+writing to pcipdata/pcip_sum.sai.2.2094.nc
+year=np.int64(2095), 96 TCs
+writing to pcipdata/pcip_sum.sai.2.2095.nc
+year=np.int64(2096), 74 TCs
+writing to pcipdata/pcip_sum.sai.2.2096.nc
+year=np.int64(2097), 88 TCs
+writing to pcipdata/pcip_sum.sai.2.2097.nc
+expname='SAI2050', run_ensemble=1, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.001.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 89 TCs
+writing to pcipdata/pcip_sum.sai.1.2093.nc
+year=np.int64(2094), 82 TCs
+writing to pcipdata/pcip_sum.sai.1.2094.nc
+year=np.int64(2095), 92 TCs
+writing to pcipdata/pcip_sum.sai.1.2095.nc
+year=np.int64(2096), 88 TCs
+writing to pcipdata/pcip_sum.sai.1.2096.nc
+year=np.int64(2097), 75 TCs
+writing to pcipdata/pcip_sum.sai.1.2097.nc
+expname='SAI2050', run_ensemble=4, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.004.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 76 TCs
+writing to pcipdata/pcip_sum.sai.4.2093.nc
+year=np.int64(2094), 97 TCs
+writing to pcipdata/pcip_sum.sai.4.2094.nc
+year=np.int64(2095), 84 TCs
+writing to pcipdata/pcip_sum.sai.4.2095.nc
+year=np.int64(2096), 92 TCs
+writing to pcipdata/pcip_sum.sai.4.2096.nc
+year=np.int64(2097), 84 TCs
+writing to pcipdata/pcip_sum.sai.4.2097.nc
+expname='RCP8.5', run_ensemble=6, stream='h3', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12_without_SAI.001.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 87 TCs
+writing to pcipdata/pcip_sum.cnt.6.2093.nc
+year=np.int64(2094), 94 TCs
+writing to pcipdata/pcip_sum.cnt.6.2094.nc
+year=np.int64(2095), 97 TCs
+writing to pcipdata/pcip_sum.cnt.6.2095.nc
+year=np.int64(2096), 111 TCs
+writing to pcipdata/pcip_sum.cnt.6.2096.nc
+year=np.int64(2097), 85 TCs
+writing to pcipdata/pcip_sum.cnt.6.2097.nc
+expname='RCP8.5', run_ensemble=1, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.001.cam2.h2.2092-12-01-10800_2097-12-31-10800.json
+year=np.int64(2093), 79 TCs
+writing to pcipdata/pcip_sum.cnt.1.2093.nc
+year=np.int64(2094), 103 TCs
+writing to pcipdata/pcip_sum.cnt.1.2094.nc
+year=np.int64(2095), 88 TCs
+writing to pcipdata/pcip_sum.cnt.1.2095.nc
+year=np.int64(2096), 91 TCs
+writing to pcipdata/pcip_sum.cnt.1.2096.nc
+year=np.int64(2097), 86 TCs
+writing to pcipdata/pcip_sum.cnt.1.2097.nc
+expname='Reference', run_ensemble=2, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.002.cam2.h2.2002-12-01-10800_2007-12-31-10800.json
+year=np.int64(2003), 93 TCs
+writing to pcipdata/pcip_sum.ref.2.2003.nc
+year=np.int64(2004), 92 TCs
+writing to pcipdata/pcip_sum.ref.2.2004.nc
+year=np.int64(2005), 111 TCs
+writing to pcipdata/pcip_sum.ref.2.2005.nc
+year=np.int64(2006), 108 TCs
+writing to pcipdata/pcip_sum.ref.2.2006.nc
+year=np.int64(2007), 81 TCs
+writing to pcipdata/pcip_sum.ref.2.2007.nc
+expname='RCP8.5', run_ensemble=3, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.003.cam2.h2.2092-12-01-10800_2098-01-30-10800.json
+year=np.int64(2093), 84 TCs
+writing to pcipdata/pcip_sum.cnt.3.2093.nc
+year=np.int64(2094), 118 TCs
+writing to pcipdata/pcip_sum.cnt.3.2094.nc
+year=np.int64(2095), 85 TCs
+writing to pcipdata/pcip_sum.cnt.3.2095.nc
+year=np.int64(2096), 91 TCs
+writing to pcipdata/pcip_sum.cnt.3.2096.nc
+year=np.int64(2097), 87 TCs
+writing to pcipdata/pcip_sum.cnt.3.2097.nc
+expname='Reference', run_ensemble=3, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.003.cam2.h2.2002-12-01-10800_2007-12-31-10800.json
+year=np.int64(2003), 115 TCs
+writing to pcipdata/pcip_sum.ref.3.2003.nc
+year=np.int64(2004), 95 TCs
+writing to pcipdata/pcip_sum.ref.3.2004.nc
+year=np.int64(2005), 93 TCs
+writing to pcipdata/pcip_sum.ref.3.2005.nc
+year=np.int64(2006), 77 TCs
+writing to pcipdata/pcip_sum.ref.3.2006.nc
+year=np.int64(2007), 115 TCs
+writing to pcipdata/pcip_sum.ref.3.2007.nc
+expname='Reference', run_ensemble=4, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.004.cam2.h2.2002-12-01-10800_2007-12-31-10800.json
+year=np.int64(2003), 103 TCs
+writing to pcipdata/pcip_sum.ref.4.2003.nc
+year=np.int64(2004), 104 TCs
+writing to pcipdata/pcip_sum.ref.4.2004.nc
+year=np.int64(2005), 81 TCs
+writing to pcipdata/pcip_sum.ref.4.2005.nc
+year=np.int64(2006), 112 TCs
+writing to pcipdata/pcip_sum.ref.4.2006.nc
+year=np.int64(2007), 99 TCs
+writing to pcipdata/pcip_sum.ref.4.2007.nc
+expname='Reference', run_ensemble=5, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.005.cam2.h2.2002-12-01-10800_2008-02-24-10800.json
+year=np.int64(2003), 114 TCs
+writing to pcipdata/pcip_sum.ref.5.2003.nc
+year=np.int64(2004), 103 TCs
+writing to pcipdata/pcip_sum.ref.5.2004.nc
+year=np.int64(2005), 107 TCs
+writing to pcipdata/pcip_sum.ref.5.2005.nc
+year=np.int64(2006), 94 TCs
+writing to pcipdata/pcip_sum.ref.5.2006.nc
+year=np.int64(2007), 103 TCs
+writing to pcipdata/pcip_sum.ref.5.2007.nc
+expname='Reference', run_ensemble=1, stream='h2', outdir='pcipdata'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.001.cam2.h2.2002-12-01-10800_2012-12-31-10800.json
+year=np.int64(2003), 87 TCs
+writing to pcipdata/pcip_sum.ref.1.2003.nc
+year=np.int64(2004), 97 TCs
+writing to pcipdata/pcip_sum.ref.1.2004.nc
+year=np.int64(2005), 103 TCs
+writing to pcipdata/pcip_sum.ref.1.2005.nc
+year=np.int64(2006), 89 TCs
+writing to pcipdata/pcip_sum.ref.1.2006.nc
+year=np.int64(2007), 102 TCs
+writing to pcipdata/pcip_sum.ref.1.2007.nc
+
+JOB STATISTICS
+==============
+Job ID: 11968011
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 2-22:34:40 core-walltime
+Job Wall-clock time: 04:24:40
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 28.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
