@@ -1,5 +1,6 @@
 import json
 import os
+import glob
 import re
 from kerchunk.netCDF3 import NetCDF3ToZarr
 from kerchunk.combine import MultiZarrToZarr
@@ -77,7 +78,6 @@ def open_mfdataset(filepaths: list[str], ncstore_dir: str='~/kerchunk', verbose=
         if verbose:
             print(f"Writing combined kerchunk reference file {ncstore_path}")
         f.write(json.dumps(mzz.translate()).encode())
-    
     return xr.open_dataset(ncstore_path, **kwargs)
 
 
@@ -175,6 +175,8 @@ class Cases:
         self.model_component = comp
         self.file_stream = stream
         self.files = self.files[comp][stream]
+        if (self.tag in ['hres.cnt.2','hres.cnt.4','hres.cnt.5']) and (self.file_stream in ['h1','h2']):
+            self.files = sorted(self.files)[:-1] # last files of these datasets is empty, causing issues
         return self
 
 
