@@ -17,14 +17,6 @@ from scipy.interpolate import interp1d
 from src.load_SAIdata import Cases
 
 
-async def add_data(arr, index, value):
-    print(f"adding {value} to id {index}")
-    await asyncio.sleep(1)
-    arr[index] += value
-    print(f"new array: {arr}")
-    return
-
-
 def preprocess_precipitation(data):
     """convert to 6-hourly average precipitation in mm/hour and center time stamps"""
     da = data.PRECT.copy()
@@ -48,6 +40,8 @@ def open_track_dataset(datadir, fix_gaps=False):
     datadir : str
         folder where all tracker data are present
         JdJ: ['../../tracker/data/','/home/jasperdj/files_rene/']
+    fix_gaps : bool
+        fill a handful spurious NaN values in tracks 
     """
     open_kwargs = {
         'Reference': ('RCP',2002,'ref'), 
@@ -110,20 +104,49 @@ def open_track_dataset(datadir, fix_gaps=False):
     return ds
 
 
+def circular_mask(r=5, lats, lons):
+    """Return mask which is True within r degrees of TC center"""
+    Nlons = lons.size # number of longitudes (total)
+    Nlats = lats.size # number of latitudes (total)
+    dx = round(r*Nlons/360)
+    dy = round(r*Nlats/180)
+    print(f"{dx=}, {dy=}")
+    circlemask = np.sqrt((360/Nlons*np.arange(-dx,dx+1)[None,:])**2 
+        + (180/Nlats*np.arange(-dy,dy+1)[:,None])**2) <= d
+    return circlemask
 
 
+async def add_data(da, lat, lon, time, mask, result):
+    """fetch data around TC center at some time"""
+    x = np.searchsorted(da.lon, lon)
+    y = np.searchsorted(da.lat, lat)
+    dx = int((mask.shape[1]-1)/2)
+    dy = int((mask.shape[0]-1)/2)
+    xs = np.arange(x-dx,x+dx+1,)%len(da.lon)
+    ys = np.arange(max(y-dy,0),min(y+dy+1,len(da.lat)))
+    da_c = await da.interp(time=time)[ys,xs].values
+    result[ys,xs] += da_c * mask
+    print(f'add_data: {time=}')
 
-def main():
-    ds = open_track_dataset('../../tracker/data/')
-    result = xr.DataArray([0,0,0], coords=[('x',[0,1,2])])
-    print(f'{result=}')
-    tasks = [
-        add_data(result,1,1), 
-        add_data(result,2,1),
-        add_data(result,2,1)
-    ]
+
+async def add_track_data(da, track, result):
+    """fetch data around TC center for whole track"""
+    track = track.where(track.notnull(), drop=True)
+    tasks = [add_data(da, lat, lon, time, mask, result) for (lat, lon, time)
+             in zip(track.lat, track.lon, track.time)]
     await asyncio.gather(*tasks)
-    print(f'{result=}')
+    
 
-if __name__ == '__main__':
-    asyncio.run(main())
+# def main():
+ds = open_track_dataset('../../tracker/data/')
+ds = ds['Reference'].where(ds['Reference'].ens==1, drop=True)
+track = ds_tracks.isel(id=101)
+pcip = Cases('hres.ref.1').select('atm','h2').open_mfdataset(decode_cf=False)
+pcip = preprocess_precipitation(pcip)
+mask = circular_mask(r=5, lats=pcip.lat, lons=pcip.lon)
+result = xr.zeros_like(pcip.isel(time=0))
+asyncio.run(add_track_data(pcip, track, result))
+    
+
+# if __name__ == '__main__':
+#     main()
