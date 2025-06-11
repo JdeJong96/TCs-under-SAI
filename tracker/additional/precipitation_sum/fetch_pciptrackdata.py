@@ -143,7 +143,7 @@ def main():
         os.mkdir(outdir)
     
     # open track data
-    ds = open_track_dataset('../../tracker/data/')
+    ds = open_track_dataset('../../../tracker/data/')
     ds = ds[expname].where(ds[expname].ens==run_ensemble, drop=True)
     years = np.unique(ds.year)
     years = years[~np.isnan(years)].astype('int')
