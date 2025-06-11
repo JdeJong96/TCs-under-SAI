@@ -1,0 +1,266 @@
+expname='SAI2050', run_ensemble=6, stream='h3', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.006.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 73 TCs
+writing to data/pcip_sum.sai.6.2093.nc
+year=np.int64(2094), 87 TCs
+writing to data/pcip_sum.sai.6.2094.nc
+year=np.int64(2095), 100 TCs
+writing to data/pcip_sum.sai.6.2095.nc
+year=np.int64(2096), 89 TCs
+writing to data/pcip_sum.sai.6.2096.nc
+year=np.int64(2097), 72 TCs
+writing to data/pcip_sum.sai.6.2097.nc
+expname='SAI2050', run_ensemble=1, stream='h3', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.001.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 89 TCs
+writing to data/pcip_sum.sai.1.2093.nc
+year=np.int64(2094), 82 TCs
+writing to data/pcip_sum.sai.1.2094.nc
+year=np.int64(2095), 92 TCs
+writing to data/pcip_sum.sai.1.2095.nc
+year=np.int64(2096), 88 TCs
+writing to data/pcip_sum.sai.1.2096.nc
+year=np.int64(2097), 75 TCs
+writing to data/pcip_sum.sai.1.2097.nc
+expname='SAI2050', run_ensemble=4, stream='h3', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2092-12.004.cam2.h3.2092-12-01-21600_2097-12-01-21600.json
+year=np.int64(2093), 76 TCs
+writing to data/pcip_sum.sai.4.2093.nc
+year=np.int64(2094), 97 TCs
+writing to data/pcip_sum.sai.4.2094.nc
+year=np.int64(2095), 84 TCs
+writing to data/pcip_sum.sai.4.2095.nc
+year=np.int64(2096), 92 TCs
+writing to data/pcip_sum.sai.4.2096.nc
+year=np.int64(2097), 84 TCs
+writing to data/pcip_sum.sai.4.2097.nc
+expname='Reference', run_ensemble=6, stream='h3', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/hres_b.e10.B2000_CAM5.f02_t12.started_2002-12_without_SAI.001.cam2.h3.2002-12-01-21600_2007-12-01-21600.json
+year=np.int64(2003), 96 TCs
+writing to data/pcip_sum.ref.6.2003.nc
+year=np.int64(2004), 106 TCs
+writing to data/pcip_sum.ref.6.2004.nc
+year=np.int64(2005), 84 TCs
+writing to data/pcip_sum.ref.6.2005.nc
+year=np.int64(2006), 91 TCs
+writing to data/pcip_sum.ref.6.2006.nc
+year=np.int64(2007), 87 TCs
+writing to data/pcip_sum.ref.6.2007.nc
+expname='RCP8.5', run_ensemble=1, stream='h2', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.001.cam2.h2.2092-12-01-10800_2097-12-31-10800.json
+year=np.int64(2093), 79 TCs
+writing to data/pcip_sum.cnt.1.2093.nc
+year=np.int64(2094), 103 TCs
+writing to data/pcip_sum.cnt.1.2094.nc
+year=np.int64(2095), 88 TCs
+writing to data/pcip_sum.cnt.1.2095.nc
+year=np.int64(2096), 91 TCs
+writing to data/pcip_sum.cnt.1.2096.nc
+year=np.int64(2097), 86 TCs
+writing to data/pcip_sum.cnt.1.2097.nc
+expname='RCP8.5', run_ensemble=3, stream='h2', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.003.cam2.h2.2092-12-01-10800_2098-01-30-10800.json
+year=np.int64(2093), 84 TCs
+writing to data/pcip_sum.cnt.3.2093.nc
+year=np.int64(2094), 118 TCs
+writing to data/pcip_sum.cnt.3.2094.nc
+year=np.int64(2095), 85 TCs
+writing to data/pcip_sum.cnt.3.2095.nc
+year=np.int64(2096), 91 TCs
+writing to data/pcip_sum.cnt.3.2096.nc
+year=np.int64(2097), 87 TCs
+writing to data/pcip_sum.cnt.3.2097.nc
+expname='Reference', run_ensemble=2, stream='h2', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.002.cam2.h2.2002-12-01-10800_2007-12-31-10800.json
+year=np.int64(2003), 93 TCs
+writing to data/pcip_sum.ref.2.2003.nc
+year=np.int64(2004), 92 TCs
+writing to data/pcip_sum.ref.2.2004.nc
+year=np.int64(2005), 111 TCs
+writing to data/pcip_sum.ref.2.2005.nc
+year=np.int64(2006), 108 TCs
+writing to data/pcip_sum.ref.2.2006.nc
+year=np.int64(2007), 81 TCs
+writing to data/pcip_sum.ref.2.2007.nc
+expname='Reference', run_ensemble=1, stream='h2', outdir='data'
+REF.001: 5.000 years, 478 tracks
+REF.002: 5.000 years, 485 tracks
+REF.003: 5.000 years, 495 tracks
+REF.004: 5.000 years, 499 tracks
+REF.005: 5.000 years, 521 tracks
+REF.006: 5.000 years, 464 tracks
+RCP.001: 5.000 years, 447 tracks
+RCP.002: 5.000 years, 438 tracks
+RCP.003: 5.000 years, 465 tracks
+RCP.004: 5.000 years, 465 tracks
+RCP.005: 5.000 years, 457 tracks
+RCP.006: 5.000 years, 474 tracks
+SAI.001: 5.000 years, 426 tracks
+SAI.002: 5.000 years, 430 tracks
+SAI.003: 5.000 years, 413 tracks
+SAI.004: 5.000 years, 433 tracks
+SAI.005: 5.000 years, 405 tracks
+SAI.006: 5.000 years, 421 tracks
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.001.cam2.h2.2002-12-01-10800_2012-12-31-10800.json
+year=np.int64(2003), 87 TCs
+writing to data/pcip_sum.ref.1.2003.nc
+year=np.int64(2004), 97 TCs
+writing to data/pcip_sum.ref.1.2004.nc
+year=np.int64(2005), 103 TCs
+writing to data/pcip_sum.ref.1.2005.nc
+year=np.int64(2006), 89 TCs
+writing to data/pcip_sum.ref.1.2006.nc
+year=np.int64(2007), 102 TCs
+writing to data/pcip_sum.ref.1.2007.nc
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456935 Killed                  python fetch_pciptrackdata.py ref 3
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456936 Killed                  python fetch_pciptrackdata.py ref 4
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456937 Killed                  python fetch_pciptrackdata.py ref 5
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456940 Killed                  python fetch_pciptrackdata.py cnt 2
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456942 Killed                  python fetch_pciptrackdata.py cnt 4
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456943 Killed                  python fetch_pciptrackdata.py cnt 5
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456944 Killed                  python fetch_pciptrackdata.py cnt 6
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456946 Killed                  python fetch_pciptrackdata.py sai 2
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456947 Killed                  python fetch_pciptrackdata.py sai 3
+/var/spool/slurm/slurmd/job12286455/slurm_script: line 31: 1456949 Killed                  python fetch_pciptrackdata.py sai 5
+slurmstepd: error: Detected 10 oom_kill events in StepId=12286455.batch. Some of the step tasks have been OOM Killed.
+
+JOB STATISTICS
+==============
+Job ID: 12286455
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 10:58:08 core-walltime
+Job Wall-clock time: 00:41:08
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 28.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
