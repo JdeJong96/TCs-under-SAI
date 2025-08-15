@@ -3,7 +3,7 @@ import xarray as xr
 
 exps = ['ref','cnt','sai'] # experiments
 name = 'pcip_sum' # first part of input names, also used for output name
-infiles = lambda exp: f'data/pcip_sum/{name}.{exp}.*.*.nc'
+infiles = lambda exp: f'data/{name}.{exp}.*.*.nc'
 outfile = f'data/{name}.nc'
 
 def merge_experiment(exp):
