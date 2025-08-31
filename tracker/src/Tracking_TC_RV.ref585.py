@@ -37,8 +37,8 @@ if experiment == 'ref':
 					   'ocn':ddir+'/ocn/hist/daily'}
 	stream			= 'h1' # file stream with 3 hourly instantaneous variables
 	stream_prec		= 'h2' # file stream with 3 hourly average precipitation
-	directory		= f'/home/jasperdj/files_rene/RCP.started_{run_year_start}.{run_ensemble:03d}'
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
+	directory		= f'../data/RCP.started_{run_year_start}.{run_ensemble:03d}'
+	gridfile		= '../data/Atmosphere_0_25_DX_DY_AREA.nc'
 	RVSEARCHRADIUS = 200 # (km) search radius for TC at previous time step
 	NOUT			= 8 # number of time steps per day
 	time_slice      = ('2004-02-14','2004-02-27') # time period to analyse
