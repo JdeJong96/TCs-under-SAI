@@ -41,40 +41,38 @@ if experiment == 'ref':
 	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
 	RVSEARCHRADIUS = 200 # (km) search radius for TC at previous time step
 	NOUT			= 8 # number of time steps per day
-#	time_slice 		= ('2003-01-01','2008-01-01') # time period to analyse
 	time_slice      = ('2004-02-14','2004-02-27') # time period to analyse
-#   outfile			= f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
 	outfile         = f'TCs.{experiment}.{run_ensemble:03d}-2004-02.nc'
-elif experiment == 'rcp':
-	run_year_start	= 2092
-	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
-	ddir			= '/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/'+experiment_name+'/OUTPUT'
-	datadir			= {'atm': ddir+'/atm/hist/3h', 
-					   'atm_mon': ddir+'/atm/hist/monthly', 
-					   'ocn':ddir+'/ocn/hist/daily'}
-	stream			= 'h1' # file stream with 3 hourly instantaneous variables
-	stream_prec		= 'h2' # file stream with 3 hourly average precipitation
-	directory		= f'/home/jasperdj/files_rene/RCP.started_{run_year_start}.{run_ensemble:03d}'
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
-	RVSEARCHRADIUS = 200 # (km) search radius for TC at previous time step
-	NOUT			= 8 # number of time steps per day
-	time_slice 		= ('2093-01-01','2098-01-01') # time period to analyse
-	outfile			= f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
-elif experiment == 'sai':
-	run_year_start	= 2092
-	experiment_name = 'hres_b.e10.B2000_CAM5.f02_t12.started_'+str(run_year_start)+'-12.'+str(run_ensemble).zfill(3)
-	ddir			= '/projects/0/nwo2021025/archive/'+experiment_name
-	datadir			= {'atm': ddir+'/atm/hist', 
-					   'atm_mon': ddir+'/atm/hist', 
-					   'ocn':ddir+'/ocn/hist'}
-	stream			= 'h5' # file stream with 3 hourly instantaneous variables
-	stream_prec		= 'h3' # file stream with 6 hourly average precipitation
-	directory		= '/home/jasperdj/files_rene/SAI.started_'+str(run_year_start)+'.'+str(run_ensemble).zfill(3)
-	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
-	RVSEARCHRADIUS	= 200 # (km) search radius for TC at previous time step
-	NOUT			= 8 # number of time steps per day
-	time_slice 		= ('2093-01-01','2098-01-01') # time period to analyse
-	outfile			= f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
+# elif experiment == 'rcp':
+# 	run_year_start	= 2092
+# 	experiment_name = f'b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
+# 	ddir			= '/projects/0/prace_imau/prace_2013081679/cesm1_0_4/f02_t12/'+experiment_name+'/OUTPUT'
+# 	datadir			= {'atm': ddir+'/atm/hist/3h', 
+# 					   'atm_mon': ddir+'/atm/hist/monthly', 
+# 					   'ocn':ddir+'/ocn/hist/daily'}
+# 	stream			= 'h1' # file stream with 3 hourly instantaneous variables
+# 	stream_prec		= 'h2' # file stream with 3 hourly average precipitation
+# 	directory		= f'/home/jasperdj/files_rene/RCP.started_{run_year_start}.{run_ensemble:03d}'
+# 	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
+# 	RVSEARCHRADIUS = 200 # (km) search radius for TC at previous time step
+# 	NOUT			= 8 # number of time steps per day
+# 	time_slice 		= ('2093-01-01','2098-01-01') # time period to analyse
+# 	outfile			= f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
+# elif experiment == 'sai':
+# 	run_year_start	= 2092
+# 	experiment_name = 'hres_b.e10.B2000_CAM5.f02_t12.started_'+str(run_year_start)+'-12.'+str(run_ensemble).zfill(3)
+# 	ddir			= '/projects/0/nwo2021025/archive/'+experiment_name
+# 	datadir			= {'atm': ddir+'/atm/hist', 
+# 					   'atm_mon': ddir+'/atm/hist', 
+# 					   'ocn':ddir+'/ocn/hist'}
+# 	stream			= 'h5' # file stream with 3 hourly instantaneous variables
+# 	stream_prec		= 'h3' # file stream with 6 hourly average precipitation
+# 	directory		= '/home/jasperdj/files_rene/SAI.started_'+str(run_year_start)+'.'+str(run_ensemble).zfill(3)
+# 	gridfile		= '/home/jasperdj/files_rene/Atmosphere_0_25_DX_DY_AREA.nc'
+# 	RVSEARCHRADIUS	= 200 # (km) search radius for TC at previous time step
+# 	NOUT			= 8 # number of time steps per day
+# 	time_slice 		= ('2093-01-01','2098-01-01') # time period to analyse
+# 	outfile			= f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.nc'
 # elif experiment == 'mres': # SAI mres data
 #	experiment_name = 'mres_b.e10.B2000_CAM5.f05_t12.001'
 #	ddir			= '/projects/0/nwo2021025/archive/'+experiment_name
@@ -91,35 +89,6 @@ elif experiment == 'sai':
 #	outfile			= 'TC_tracker_results.{experiment}.nc'
 else:
 	raise ValueError(f'Incorrect experiment tag ({experiment}) provided, should be one of [rcp,sai,mres].')
-
-
-# def chunk_data(files):
-#	"""divide data into daily chunks"""
-#	n = 0 
-#	dt = 1/NOUT # output time step in days
-#	with netcdf.Dataset(files[0],'r') as fh:
-#		time = fh.variables['time'][:]
-#		if 'time: mean' in getattr(fh['U850'], 'cell_methods', ''):
-#			time = time - 0.5*dt
-#		dates = [cftime.num2date(t, fh['time'].units, fh['time'].calendar).strftime("%Y%m%d") for t in time]
-#		chunks = [[dates[0],[0],0,0]]
-#	for fid in range(len(files)):
-#		with netcdf.Dataset(files[fid],'r') as fh:
-#			time = fh.variables['time'][:]
-#			if 'time: mean' in getattr(fh['U850'], 'cell_methods', ''):
-#				time = time - 0.5*dt
-#			dates = [cftime.num2date(t, fh['time'].units, fh['time'].calendar).strftime("%Y%m%d") for t in time]
-#			for i,newdate in enumerate(dates):
-#				(olddate, fids0, i0, n0) = chunks[-1]
-#				if newdate != olddate:
-#					if fids0[-1] != fid and i!=0:
-#						chunks[-1][1].append(fid)
-#					chunks[-1][3] = i0 + n - n0
-#					chunks.append([newdate,[fid],i,n])
-#				n += 1
-#	(olddate, fids0, i0, n0) = chunks[-1]
-#	chunks[-1][3] = i0 + n - n0
-#	return chunks
 
 
 def chunk_data(files):
@@ -894,6 +863,8 @@ for task in tasks:
 				data_track[10]	= TC_shear
 				data_track[11]	= prec_max
 				data_track[12]	= temp_anom_TC
+                if np.isnan(lon_pres):
+                    print("ERROR: NaN longitude added to existing track (L867)")
 
 				#Get the correct ID
 				exec('TRACK_ID_'+str(track_i)+' = np.ma.vstack([TRACK_ID_'+str(track_i)+', data_track])')
@@ -979,6 +950,8 @@ for task in tasks:
 						data_track[10]	= TC_shear
 						data_track[11]	= prec_max
 						data_track[12]	= temp_anom_TC
+                        if np.isnan(lon_pres):
+                            print("ERROR: NaN longitude added to existing weakened track (L954)")
 
 						#Get the correct ID
 						exec('TRACK_ID_'+str(track_i)+' = np.ma.vstack([TRACK_ID_'+str(track_i)+', data_track])')
@@ -1071,6 +1044,8 @@ for task in tasks:
 				data_track[10]	= TC_shear
 				data_track[11]	= prec_max
 				data_track[12]	= temp_anom_TC
+                if np.isnan(lon_pres):
+                    print("ERROR: NaN longitude added to existing track of length 1 (L1048)")
 
 				#Get the correct ID
 				exec('TRACK_ID_'+str(track_i)+' = np.ma.vstack([TRACK_ID_'+str(track_i)+', data_track])')
@@ -1138,6 +1113,8 @@ for task in tasks:
 			data_track[10]	= TC_shear
 			data_track[11]	= prec_max
 			data_track[12]	= temp_anom_TC
+            if np.isnan(lon_pres):
+                print("ERROR: NaN longitude added to new track (L1117)")
 
 			#Initiate new track for new low
 			exec('TRACK_ID_'+str(track_ID)+' = data_track')
