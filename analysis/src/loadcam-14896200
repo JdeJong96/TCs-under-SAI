@@ -1,0 +1,15 @@
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2092-12.004.cam2.h1.2092-12-01-10800_2098-01-15-10800.json
+
+JOB STATISTICS
+==============
+Job ID: 14896200
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:03:26
+CPU Efficiency: 3.52% of 01:37:36 core-walltime
+Job Wall-clock time: 00:06:06
+Memory Utilized: 918.41 MB
+Memory Efficiency: 3.20% of 28.00 GB (1.75 GB/core)

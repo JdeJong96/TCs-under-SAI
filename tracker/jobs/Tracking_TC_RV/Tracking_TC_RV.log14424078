@@ -1,0 +1,21 @@
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+
+JOB STATISTICS
+==============
+Job ID: 14424078
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 4-23:07:36 core-walltime
+Job Wall-clock time: 04:57:49
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 42.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.

@@ -1,0 +1,55 @@
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+/var/spool/slurm/slurmd/job14418299/slurm_script: line 31: 61533 Killed                  python -u $script.py ref 3 > $script.log.ref.3
+/var/spool/slurm/slurmd/job14418299/slurm_script: line 31: 61545 Killed                  python -u $script.py sai 3 > $script.log.sai.3
+/var/spool/slurm/slurmd/job14418299/slurm_script: line 31: 61548 Killed                  python -u $script.py sai 6 > $script.log.sai.6
+[2025-09-01T22:49:15.079] error: Detected 3 oom_kill events in StepId=14418299.batch. Some of the step tasks have been OOM Killed.
+
+JOB STATISTICS
+==============
+Job ID: 14418299
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 6-20:29:36 core-walltime
+Job Wall-clock time: 06:51:14
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 42.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
