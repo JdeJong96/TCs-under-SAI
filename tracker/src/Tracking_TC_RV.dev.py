@@ -821,37 +821,6 @@ def remove_candidate(track_i, track_ID_active):
     exec(f'del TRACK_ID_{track_i}') # free up memory
     return
 
-#--------------
-
-#Get the indices and coordinates for the PSL minimum
-lon_index   = PSL_min_lon_opt[index_min]
-lat_index   = PSL_min_lat_opt[index_min]
-
-#Get the 850 hPa TEMP anom (8x8)
-temp_anom_TC    = temp_anom_opt[index_min]
-
-#---------------------------------------------------------------
-
-#Get the indices and coordinates for the PSL minimum
-lon_index   = PSL_min_lon[index_min]
-lat_index   = PSL_min_lat[index_min]
-
-#Get the 850 hPa TEMP anom (8x8)
-temp_anom_TC    = temp_anom[index_min]
-
-#---------------------------------------------------------------
-
-#Get the indices and coordinates for the PSL minimum
-lon_index   = PSL_min_lon[min_i]
-lat_index   = PSL_min_lat[min_i]
-
-#Get the 850 hPa TEMP anom (8x8)
-temp_anom_TC    = temp_anom[min_i]
-
-if SST_TC_day is np.ma.masked:
-    #TC forms above land, discard RV maxima
-    continue
-
 #-----------------------------------------------------------------------------------------
 #--------------------------------MAIN SCRIPT STARTS HERE----------------------------------
 #-----------------------------------------------------------------------------------------  
