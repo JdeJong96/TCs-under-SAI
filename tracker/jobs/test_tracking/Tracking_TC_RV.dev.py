@@ -181,11 +181,13 @@ def chunk_data(files):
     
 def getattstr(dataset, name):
     ncvar = dataset[name]
-    attrs = {a:getattr(ncvar,a) for a in ncvar.ncattrs()}
+    attrs = {a:getattr(ncvar,a) for a in ncvar.ncattrs() if a not in ['_FillValue','missing_value']}
     if name == 'PSL':
         attrs['units'] = 'h'+attrs['units']
         if 'cell_methods' in attrs and 'time: mean' in attrs['cell_methods']:
             name = 'PSLmon' 
+    if name == 'SST':
+        attrs['missing_value'] = 100
     return f"{name}:{attrs}"
 
 
@@ -840,7 +842,13 @@ def shorten_track_until_TC_strength(track):
     if np.max(track[:,5]) > 17.0:
         idx = np.nonzero(track[:,5]>17.0)[0][0]
         track = track[:idx]
+        print(f'TRACK_ID_{track_i} = TRACK_ID_{track_i}[:{idx}] (remove after v10>17m/s)')
+        exec(f'TRACK_ID_{track_i} = TRACK_ID_{track_i}[:{idx}]', globals())
     return track
+
+
+def shorten_track_until_TC_strength(track):
+    """end track once V10 reaches 17m/s for 12 consecutive hours"""
 
 
 def has_24_hours_of_weak_shear(track):
@@ -990,6 +998,8 @@ print(files[-1])
 print(f"output file: {outdir}/{outfile}")
 if os.path.exists(f'{outdir}/{outfile}'):
     raise ValueError(f'{outfile} already exists, quitting...')
+
+print(f"Track TC seeds: {SEEDS}")
 
 #-----------------------------------------------------------------------------------------
 
@@ -1349,8 +1359,8 @@ for task in tasks:
 
 
 
-    print(f"\n{counter_notupdated} tracks finished -> {len(track_ID_active)=}\n  discard: {counter_tooshortregular+counter_tooshortland} short "
-        + f"({counter_tooshortregular} reg. {counter_tooshortland} land), {counter_origin} non trop., "
+    print(f"\n{counter_notupdated} tracks finished -> {len(track_ID_active)=}\n  discard: {counter_tooshortregular+counter_tooshortland+counter_tooshortintensity} short "
+        + f"({counter_tooshortregular} reg. {counter_tooshortland} land, {counter_tooshortintensity} intensity), {counter_origin} non trop., "
         + f"{counter_velmax} weak, {counter_shear} shear, {counter_SST} SST")
 
 #-----------------------------------------------------------------------------------------
@@ -1420,8 +1430,8 @@ for track_i in track_ID_active:
     #print(f"save TRACK_ID_{track_i} (valid), {duration_track=}hr, archiving...")
     #track_ID_list.append(track_i)
     
-print(f"Tracks still active at the end ({len(track_ID_active)}):\n  {counter_tooshortregular+counter_tooshortland} short "
-    + f"({counter_tooshortregular} reg. {counter_tooshortland} land), {counter_origin} non trop., "
+print(f"Tracks still active at the end ({len(track_ID_active)}):\n  {counter_tooshortregular+counter_tooshortland+counter_tooshortintensity} short "
+    + f"({counter_tooshortregular} reg. {counter_tooshortland} land, {counter_tooshortintensity} intensity), {counter_origin} non trop., "
     + f"{counter_velmax} weak, {counter_shear} shear, {counter_SST} SST")       
 print(f"Total number of valid stored tracks: {len(track_ID_list)}")
 
