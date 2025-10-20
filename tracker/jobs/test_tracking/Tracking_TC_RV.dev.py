@@ -847,10 +847,6 @@ def shorten_track_until_TC_strength(track):
     return track
 
 
-def shorten_track_until_TC_strength(track):
-    """end track once V10 reaches 17m/s for 12 consecutive hours"""
-
-
 def has_24_hours_of_weak_shear(track):
     """returns whether the track has 8 consecutive steps with low windshear"""
     
