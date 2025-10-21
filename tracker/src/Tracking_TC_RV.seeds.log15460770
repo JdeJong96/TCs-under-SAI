@@ -1,0 +1,12 @@
+Job ID: 15460770
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 4-00:15:12 core-walltime
+Job Wall-clock time: 04:00:38
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 42.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
