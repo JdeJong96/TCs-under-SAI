@@ -40,7 +40,7 @@ if (experiment == 'ref') and (run_ensemble<=5):
     directory       = f'{ROOT}/data/RCP.started_{run_year_start}.{run_ensemble:03d}'
     gridfile        = f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
     RVSEARCHRADIUS  = 200 # (km) search radius for TC at previous time step
-    time_slice      = ('2003-01-01','2003-02-01') # time period to analyse
+    time_slice      = ('2003-01-01','2003-04-01') # time period to analyse
     outfile         = f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.seeds.nc'
 elif (experiment=='ref') and (run_ensemble==6):
     run_year_start  = 2002
@@ -86,14 +86,14 @@ elif (experiment=='rcp') and (run_ensemble==6):
     outfile         = f'TC_tracker_results.{experiment}.started_{run_year_start}.{run_ensemble:03d}.seeds.nc'
 elif experiment == 'sai':
     run_year_start  = 2092
-    experiment_name = 'hres_b.e10.B2000_CAM5.f02_t12.started_'+str(run_year_start)+'-12.'+str(run_ensemble).zfill(3)
+    experiment_name = f'hres_b.e10.B2000_CAM5.f02_t12.started_{run_year_start}-12.{run_ensemble:03d}'
     ddir            = '/projects/0/nwo2021025/archive/'+experiment_name
     datadir         = {'atm': ddir+'/atm/hist', 
                        'atm_mon': ddir+'/atm/hist', 
                        'ocn':ddir+'/ocn/hist'}
     stream          = 'h5' # file stream with 3 hourly instantaneous variables
     stream_prec     = 'h3' # file stream with 6 hourly average precipitation
-    directory       = f'{ROOT}/data/SAI.started_'+str(run_year_start)+'.'+str(run_ensemble).zfill(3)
+    directory       = f'{ROOT}/data/SAI.started_{run_year_start}.{run_ensemble:03d}'
     gridfile        = f'{ROOT}/data/Atmosphere_0_25_DX_DY_AREA.nc'
     RVSEARCHRADIUS  = 200 # (km) search radius for TC at previous time step
     time_slice      = ('2093-01-01','2098-01-01') # time period to analyse
@@ -103,9 +103,9 @@ else:
 
 outdir = directory  # directory for output file
 files = sorted(glob.glob(f'{datadir["atm"]}/{experiment_name}.cam2.{stream}.*.nc')) # input (CAM) files
-files = files[6:20]
+files = files[6:30]
 outdir = '.'
-outfile = 'test.dev.N1.nc'
+outfile = f'test.dev.N{N_extend}.nc'
 # files = files[6:373]
 
 
@@ -215,31 +215,6 @@ def ReadinData(filenames, x_diff, y_diff, t1, t2):
     return time, timestamp, date, lon, lat, lat_weight, pres, U_10, vor_850, u_vel_850[:, 1:-1, 1:-1], v_vel_850[:, 1:-1, 1:-1], u_vel_250, v_vel_250, prec
 
     
-# # original function
-#
-# def ReadinDataPRECT(timestamp):
-#   """Get precipitation from separate file stream, linearly interpolating to timestamp"""
-#   files = sorted(glob.glob(f'{datadir["atm"]}/{experiment_name}.cam2.{stream_prec}.*.nc'))
-#   dates = [file[-19:-3] for file in files]
-#   date0, date1 = timestamp[0].strftime('%Y-%m-%d'), timestamp[-1].strftime('%Y-%m-%d')
-#   fid0 = max(np.searchsorted(dates, date0)-1,0)
-#   fid1 = np.searchsorted(dates, date1)+1
-#   with netcdf.MFDataset(files[fid0:fid1], 'r') as fh: 
-#       nc_time = fh['time'][:] # Time (end of interval)
-#       if 'time: mean' in getattr(fh['PRECT'], 'cell_methods', ''):
-#           nc_time = fh['time_bnds'][:].mean(axis=-1) # Center time if data represents time average
-#       times = cftime.date2num(timestamp, fh['time'].units, fh['time'].calendar) # convert timestamp to same units
-#       tids = [np.argmin(np.abs(nc_time-t)) for t in times]
-#       prec = fh['PRECT'][tids,127:641]
-#       if times[0] < nc_time[0] or times[-1] > nc_time[-1]:
-#           ids_invalid = (times < nc_time[0]) | (times > nc_time[-1])
-#           prec[ids_invalid] = np.nan
-#           print(f"WARNING: Failed to interpolate PRECT to {times[ids_invalid]=}, available times: {nc_time=}")
-#       if track_attrs[11] == '':
-#           track_attrs[11] = getattstr(fh, 'PRECT')
-#   return prec
-
-
 def ReadinDataPRECT(timestamp):
     """Get precipitation from separate file stream, linearly interpolating to timestamp"""
     files = sorted(glob.glob(f'{datadir["atm"]}/{experiment_name}.cam2.{stream_prec}.*.nc'))
@@ -286,8 +261,8 @@ def ReadinDataPRECT(timestamp):
                 nc_prec = np.mean([nc_prec[1::2],nc_prec[:-1:2]], axis=0)
         times = cftime.date2num(timestamp, fh['time'].units, fh['time'].calendar) # convert timestamp to same units
         print(f"interpolating PRECT from {len(nc_ctime)} to {len(times)} timestamps")
-        prec = interp1d(nc_ctime, nc_prec, axis=0, bounds_error=False)(times)
-        if times[0] < nc_tbnd[0,0] or times[-1] > nc_tbnd[-1,1]:
+        prec = interp1d(nc_ctime, nc_prec, axis=0, fill_value='extrapolate', bounds_error=False)(times)
+        if times[0] < nc_tbnd[0,0] or times[-1] > nc_tbnd[-1,1]:  # interpolation only valid within time bounds
             ids_invalid = (times < nc_tbnd[0,0]) | (times > nc_tbnd[-1,1])
             prec[ids_invalid] = np.nan
             print(f"\nWARNING: Failed to interpolate PRECT to {times[ids_invalid]=} "
@@ -1126,76 +1101,19 @@ for task in tasks:
         # regular or optional RV maxima.
         #-----------------------------------------------------------------------------------------
         
-        #for track_i in track_ID_active: # loop over active tracks (from previous data chunk)
-        #    exec(f'track = TRACK_ID_{track_i}')
-        #    
-        #    if track.ndim == 1:  # only one time stamp, continue (see next step)
-        #        continue
-        #        
-        #    distance = distance_adjacent_RV_maxima(PSL_min_lon, PSL_min_lat, lon, lat, track)
-        #    
-        #    if np.any(distance <= 200) == True:  # Match with regular RV maximum
-
-        #        #Check the previous RV at 850 (in case of temporarily weakening)
-        #        vor_850_TC_prev = track[-1, 9]
-
-        #        if vor_850_TC_prev < 0:
-        #            #Negative vorticity implies temporarily weakening, but now a valid PSL minima is found
-        #            #set previous RV to correct value (raise by 1) and continue
-        #            print(f'unflag TRACK_ID_{track_i} (remove weakening flag)')
-        #            exec('TRACK_ID_'+str(track_i)+'[-1, 9] += 1')
-
-        #        #Check for the closest PSL minima in the neighbourhood of extrapolated PSL minima
-        #        index_min   = np.argmin(distance)
-        #        
-        #        data_track,_ = fill_track_data(PSL_min_lon, PSL_min_lat, index_min, lon, lat, lat_weight, lon_ocn, lat_ocn, temp_anom, time_i, 
-        #            pres, pres_month, vor_850, U_10, SST_day, SST_month, u_vel_850, v_vel_850, u_vel_250, v_vel_250)
-
-        #        #Get the correct ID
-        #        #print(f'app TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)}')
-        #        exec(f'TRACK_ID_{track_i} = np.ma.vstack([TRACK_ID_{track_i}, data_track])')
-
-        #        #Remove the already assigned PSL minima from array
-        #        PSL_min_lon     = np.delete(PSL_min_lon, index_min)
-        #        PSL_min_lat     = np.delete(PSL_min_lat, index_min)
-        #        temp_anom   = np.delete(temp_anom, index_min)
-
-        #    else:  # No match with regular RV maximum, check if previous RV maximum was optional
-        #        vor_850_TC_prev = track[-1, 9]
-        #        if vor_850_TC_prev < 0:  # Negative RV850 implies the previous point was optional -> end of track
-        #            # do no update TC track and remove previous point
-        #            print(f'end TRACK_ID_{track_i} (second weakening)')
-        #            exec(f'TRACK_ID_{track_i} = TRACK_ID_{track_i}[:-1]')
-
-        #        else:  # Previous value was a regular part of the track, try to match with optional RV maxima
-        #            distance = distance_adjacent_RV_maxima(PSL_min_lon_opt, PSL_min_lat_opt, lon, lat, track)
-        #            
-        #            if np.any(distance <= 200) == True: # matched with new (optional) RV maximum
-        #                index_min   = np.argmin(distance)
-        #                data_track,_ = fill_track_data(PSL_min_lon_opt, PSL_min_lat_opt, index_min, lon, lat, lat_weight, lon_ocn, lat_ocn, temp_anom_opt, time_i, 
-        #                    pres, pres_month, vor_850, U_10, SST_day, SST_month, u_vel_850, v_vel_850, u_vel_250, v_vel_250, weakening=True)
-
-        #                # append new data
-        #                print(f'flag TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)} (first weakening)')
-        #                exec(f'TRACK_ID_{track_i} = np.ma.vstack([TRACK_ID_{track_i}, data_track])')
-
-        #                #Remove the already assigned PSL minima from array
-        #                PSL_min_lon_opt = np.delete(PSL_min_lon_opt, index_min)
-        #                PSL_min_lat_opt = np.delete(PSL_min_lat_opt, index_min)
-        #                temp_anom_opt   = np.delete(temp_anom_opt, index_min)
-
         for track_i in track_ID_active.copy(): # loop over active tracks with at least two time steps 
             exec(f'track = TRACK_ID_{track_i}')
             if track.ndim == 1:
                 continue
 
             # do not update track if maximum number of extensions has been reached
-            if (N_extend > 0) and (track[0,9] < 0):  # negative RV850 at step 0 indicates the track has ended but its being extended
+            if (N_extend > 0) and (track[0,9] < 0):  # negative RV850 at step 0 indicates the track has ended but is valid and being extended
                 time_f = np.nonzero(track[:,9]<0)[0][1] # time index of first weakening
                 num_extensions = len(track) - time_f
                 if num_extensions >= N_extend:
-                    #track_ID_active.remove(track_i)
-                    print(f"end TRACK_ID_{track_i} (max. number of extensions)")
+                    track_ID_active.remove(track_i)
+                    counter_notupdated += 1
+                    print(f"save TRACK_ID_{track_i} (valid) {len(track)=}")
                     continue
 
             # first try to match with regular RV maxima
@@ -1205,15 +1123,15 @@ for task in tasks:
 
                 # unflag RV850 in case of previously temporarily weakening
                 vor_850_TC_prev = track[-1, 9]
-                if vor_850_TC_prev < 0:  # a negative (flagged) previous RV850 implies temporarily weakening
+                if (vor_850_TC_prev < 0) and (track[0,9] > 0):  # a negative (flagged) previous RV850 implies temporarily weakening
                     print(f'unflag TRACK_ID_{track_i} (remove weakening flag)')
-                    exec('TRACK_ID_'+str(track_i)+'[-1, 9] += 1')  # unflag (+1) previous RV850 because the new RV maximum is strong
+                    exec(f'TRACK_ID_{track_i}[-1, 9] += 1')  # unflag (+1) previous RV850 because the new RV maximum is strong
 
                 # fetch and append data of closest RV maximum to track
                 index_min   = np.argmin(distance)
                 data_track,_ = fill_track_data(PSL_min_lon, PSL_min_lat, index_min, lon, lat, lat_weight, lon_ocn, lat_ocn, temp_anom, time_i,
                     pres, pres_month, vor_850, U_10, SST_day, SST_month, u_vel_850, v_vel_850, u_vel_250, v_vel_250)
-                #print(f'app TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)}')
+                print(f'app TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)} (regular)')
                 exec(f'TRACK_ID_{track_i} = np.ma.vstack([TRACK_ID_{track_i}, data_track])')
 
                 # update list of available RV maxima
@@ -1227,19 +1145,26 @@ for task in tasks:
             # without requested extension, end track if already weakened
             vor_850_TC_prev = track[-1, 9]
             if (vor_850_TC_prev < 0) and (N_extend == 0): 
-                print(f'end TRACK_ID_{track_i} (second weakening)')
+                print(f'end TRACK_ID_{track_i} (second weakening) {len(track)=}')
                 exec(f'TRACK_ID_{track_i} = TRACK_ID_{track_i}[:-1]')
                 continue
 
             # with requested extension, check immediately if track is valid and must be archived or is invalid and must be removed
             if (vor_850_TC_prev < 0) and (N_extend != 0) and (track[0,9] > 0):
+                print(f'end TRACK_ID_{track_i} (second weakening) {len(track)=}')
                 isvalid, msg = validate(track)
                 if isvalid:  # valid track: add to archive list and start matching with new (optional) maxima
-                    print(f"ext TRACK_ID_{track_i} ({msg})")
+                    print(f"ext TRACK_ID_{track_i} (start extension)")
                     track[0,9] -= 1  # flag first value of track RV850 to indicate track is being extended
-                    exec(f'TRACK_ID_{track_i} = track')  
+                    exec(f'TRACK_ID_{track_i} = track')
                     track_ID_list.append(track_i)
+                    if N_extend == 1:
+                        track_ID_active.remove(track_i)
+                        counter_notupdated += 1
+                        print(f"save TRACK_ID_{track_i} (valid) {len(track)=}")	
+                        continue
                 else:  # invalid track: remove and continue to next track
+                    counter_notupdated += 1
                     remove_candidate(track_i, track_ID_active, msg)
                     continue
 
@@ -1253,9 +1178,9 @@ for task in tasks:
                 data_track,_ = fill_track_data(PSL_min_lon_opt, PSL_min_lat_opt, index_min, lon, lat, lat_weight, lon_ocn, lat_ocn, temp_anom_opt, time_i,
                     pres, pres_month, vor_850, U_10, SST_day, SST_month, u_vel_850, v_vel_850, u_vel_250, v_vel_250, weakening=True)
                 if (track[0,9] > 0):  # if not yet in extension stage
-                    print(f'flag TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)} (first weakening)')
+                    print(f'app TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)} (optional -> first weakening)')
                 else:
-                    print(f'app TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)} (extend opt.)')
+                    print(f'ext TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)} (optional)')
                 exec(f'TRACK_ID_{track_i} = np.ma.vstack([TRACK_ID_{track_i}, data_track])')
 
                 # update list of available optional RV maxima
@@ -1264,13 +1189,13 @@ for task in tasks:
                 temp_anom_opt   = np.delete(temp_anom_opt, index_min)
         
         #-----------------------------------------------------------------------------------------
-        # Loop through active tracks having only one time steps and try to match with
+        # Loop through active tracks having only one time step and try to match with
         # regular RV maxima.
         #-----------------------------------------------------------------------------------------
         
         remove_index    = []
 
-        for track_i in track_ID_active:
+        for track_i in track_ID_active.copy():
             exec(f'track = TRACK_ID_{track_i}')
 
             if track.ndim > 1:
@@ -1283,7 +1208,7 @@ for task in tasks:
                 data_track,_ = fill_track_data(PSL_min_lon, PSL_min_lat, index_min, lon, lat, lat_weight, lon_ocn, lat_ocn, temp_anom, time_i, 
                     pres, pres_month, vor_850, U_10, SST_day, SST_month, u_vel_850, v_vel_850, u_vel_250, v_vel_250)
 
-                #print(f'app TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)}')
+                print(f'app TRACK_ID_{track_i} = {np.array_str(data_track[1:3],precision=2)} (regular)')
                 exec(f'TRACK_ID_{track_i} = np.ma.vstack([TRACK_ID_{track_i}, data_track])')
                 remove_index.append(index_min)  #Current RV maxima will not start a new track
                 
@@ -1318,7 +1243,7 @@ for task in tasks:
         # final checks and either archive or delete them.
         #-----------------------------------------------------------------------------------------
         
-        for track_i in track_ID_active:
+        for track_i in track_ID_active.copy():
             exec(f'track = TRACK_ID_{track_i}')
 
             # check if track is still active
@@ -1330,11 +1255,12 @@ for task in tasks:
             
             # check if track is validated before
             if track_i in track_ID_list:
+                print(f"save TRACK_ID_{track_i} (valid) {len(track)=}")
                 continue
             
             isvalid, msg = validate(track)
             if isvalid:
-                print(f"save TRACK_ID_{track_i} ({msg})")
+                print(f"save TRACK_ID_{track_i} ({msg}) {len(track)=}")
                 track_ID_list.append(track_i)
                 track_ID_active.remove(track_i)
             else:
@@ -1352,16 +1278,17 @@ for task in tasks:
 #  Now repeat for tracks that are still active at the end of the run
 #-----------------------------------------------------------------------------------------
 
-for track_i in track_ID_active:
+for track_i in track_ID_active.copy():
     exec(f'track = TRACK_ID_{track_i}')
 
     # check if track is validated before
     if track_i in track_ID_list:
+        print(f"save TRACK_ID_{track_i} (valid) {len(track)=}")
         continue
 
     isvalid, msg = validate(track)
     if isvalid:
-        print(f"save TRACK_ID_{track_i} ({msg})")
+        print(f"save TRACK_ID_{track_i} ({msg}) {len(track)=}")
         track_ID_list.append(track_i)
     else:
         remove_candidate(track_i, track_ID_active, msg)
@@ -1393,10 +1320,10 @@ track_all   = np.ma.masked_all((len(track_ID_list), time_max, 13))
 
 for track_i in range(len(track_ID_list)):
     #Save data to general array
-    exec('track = TRACK_ID_'+str(track_ID_list[track_i]))
+    exec(f'track = TRACK_ID_{track_ID_list[track_i]}')
     track[:,9][track[:,9]<0] += 1  # unflag RV values
     assert np.all(track[:,9]>0), f'TRACK_ID_{track_i} has unwanted flags in RV: {track[:,9]=}. Perhaps some maxima are flagged multiple times?'
-    print(f'saving TRACK_ID_{track_i}: {len(track)=}')
+    print(f'saving Track {track_i} = TRACK_ID_{track_ID_list[track_i]}: {len(track)=}')
     track_all[track_i, :len(track)] = track
     
 track_all[:,:,7:9][track_all[:,:,7:9]==100] = np.nan # missing SST/SSTmon values

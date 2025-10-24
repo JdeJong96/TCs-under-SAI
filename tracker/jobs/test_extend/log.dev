@@ -1,2 +1,0 @@
-/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/numpy/ma/core.py:489: RuntimeWarning: invalid value encountered in cast
-  fill_value = np.asarray(fill_value, dtype=ndtype)

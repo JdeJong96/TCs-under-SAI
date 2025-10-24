@@ -26,7 +26,7 @@ experiment = sys.argv[1]  # run this script like python Tracking_TC_RV.py rcp 1
 run_ensemble = int(sys.argv[2])
 ROOT = '/home/jasperdj/TCs-under-SAI/tracker'
 N_extend = 0 # number of steps to extend valid tracks using optional RV maxima (default 0, use -1 for unlimited)
-SEEDS = True # set True to track TC seeds instead of TCs
+SEEDS = False # set True to track TC seeds instead of TCs
 
 if (experiment == 'ref') and (run_ensemble<=5):
     run_year_start  = 2002
@@ -119,7 +119,7 @@ outdir = directory  # directory for output file
 files = sorted(glob.glob(f'{datadir["atm"]}/{experiment_name}.cam2.{stream}.*.nc')) # input (CAM) files
 # files = files[6:373]
 outdir = '.'
-outfile = 'test.reg.nc'
+outfile = 'test.reg.2mon.nc'
 files = files[6:20]
 
 # def chunk_data(files):
@@ -206,7 +206,7 @@ def ReadinData(filenames, x_diff, y_diff, t1, t2):
             print(f"remove {file} from tmpdir")
             os.remove(os.path.join(tmpdir,file)) # delete unused nc files from tmpdir
     tmpfilenames = [os.path.join(tmpdir, os.path.basename(f)) for f in filenames]
-    print(f"reading {tmpfilenames}, time steps {t1}-{t2}")
+    print(f"reading {[os.path.basename(f) for f in tmpfilenames]} in tmpdir, time steps {t1}-{t2}")
     with netcdf.MFDataset(tmpfilenames, 'r', aggdim='time') as fh:
         time        = fh.variables['time'][t1:t2]   # Time (end of interval)
         if 'time: mean' in getattr(fh['U850'], 'cell_methods', ''):
@@ -282,6 +282,62 @@ def ReadinData(filenames, x_diff, y_diff, t1, t2):
 #   return prec
 
 
+#def ReadinDataPRECT(timestamp):
+#    """Get precipitation from separate file stream, linearly interpolating to timestamp"""
+#    files = sorted(glob.glob(f'{datadir["atm"]}/{experiment_name}.cam2.{stream_prec}.*.nc'))
+#    dates = [file[-19:-3] for file in files]
+#    date0, date1 = timestamp[0].strftime('%Y-%m-%d'), timestamp[-1].strftime('%Y-%m-%d')
+#
+#    # first obtain three files that should contain all steps in timestamp
+#    fid0 = max(np.searchsorted(dates, date0)-1,0)
+#    fid1 = np.searchsorted(dates, date1)+1
+#    tmpfiles = [os.path.basename(f) for f in sorted(glob.glob(os.path.join(tmpdir,'*.nc')))]
+#    for file in files[fid0:fid1]:
+#        if os.path.basename(file) not in tmpfiles: # copy nc file to tmpdir if not present
+#            print(f"copying {os.path.basename(file)} to tmpdir")
+#            shutil.copyfile(file, os.path.join(tmpdir,os.path.basename(file)))
+#    for file in tmpfiles:
+#        if (file not in [os.path.basename(f) for f in files[fid0:fid1]]) and (f'.{stream_prec}.' in file):
+#            print(f"remove {file} from tmpdir")
+#            os.remove(os.path.join(tmpdir,file)) # delete unused nc files from tmpdir
+#    tmpfilenames = [os.path.join(tmpdir, os.path.basename(f)) for f in files[fid0:fid1]]
+#
+#    # loading all data from the three files is slow, so first only check time and remove the redundant files
+#    for file in tmpfilenames.copy():
+#        with netcdf.Dataset(file, 'r') as fh:
+#            times = cftime.date2num(timestamp, fh['time'].units, fh['time'].calendar) # convert timestamp to same units
+#            t0,t1 = fh['time'][0], fh['time'][-1]
+#        if t1 < times[0]:
+#            tmpfilenames.remove(file)
+#            continue
+#        if t0 > times[-1]:
+#            tmpfilenames.remove(file)
+#            continue
+#
+#    # load the data
+#    print(f"reading PRECT from {tmpfilenames}")
+#    with netcdf.MFDataset(tmpfilenames, 'r') as fh: 
+#        nc_time = fh['time'][:] # Time (end of interval)
+#        nc_tbnd = fh['time_bnds'][:] # time bounds
+#        nc_prec = fh['PRECT'][:,127:641] # precipitation
+#        if 'time: mean' in getattr(fh['PRECT'], 'cell_methods', ''):
+#            nc_time = nc_tbnd.mean(axis=-1) # Center time if data represents time average
+#            if np.diff(nc_tbnd[0]) == 0.125: # average 3hrly data to 6hrly
+#                nc_time = np.mean([nc_time[1::2],nc_time[:-1:2]], axis=0)
+#                nc_prec = np.mean([nc_prec[1::2],nc_prec[:-1:2]], axis=0)
+#        times = cftime.date2num(timestamp, fh['time'].units, fh['time'].calendar) # convert timestamp to same units
+#        print(f"interpolating PRECT from {len(nc_prec)=} to {len(nc_time)=} timestamps")
+#        prec = interp1d(nc_time, nc_prec, axis=0, bounds_error=False)(times)
+#        if times[0] < nc_time[0] or times[-1] > nc_time[-1]:
+#            ids_invalid = (times < nc_time[0]) | (times > nc_time[-1])
+#            prec[ids_invalid] = np.nan
+#            print(f"\nWARNING: Failed to interpolate PRECT to {times[ids_invalid]=} "
+#                + f"(={[str(t) for t in timestamp[ids_invalid]]}), available times: {nc_time=}")
+#        if track_attrs[11] == '':
+#            track_attrs[11] = getattstr(fh, 'PRECT')
+#    return prec
+    
+
 def ReadinDataPRECT(timestamp):
     """Get precipitation from separate file stream, linearly interpolating to timestamp"""
     files = sorted(glob.glob(f'{datadir["atm"]}/{experiment_name}.cam2.{stream_prec}.*.nc'))
@@ -315,28 +371,29 @@ def ReadinDataPRECT(timestamp):
             continue
 
     # load the data
-    print(f"reading PRECT from {tmpfilenames}")
-    with netcdf.MFDataset(tmpfilenames, 'r') as fh: 
+    print(f"reading PRECT from {[os.path.basename(f) for f in tmpfilenames]} in tmpdir")
+    with netcdf.MFDataset(tmpfilenames, 'r') as fh:
         nc_time = fh['time'][:] # Time (end of interval)
         nc_tbnd = fh['time_bnds'][:] # time bounds
         nc_prec = fh['PRECT'][:,127:641] # precipitation
         if 'time: mean' in getattr(fh['PRECT'], 'cell_methods', ''):
-            nc_time = nc_tbnd.mean(axis=-1) # Center time if data represents time average
+            nc_ctime = nc_tbnd.mean(axis=-1) # Center time if data represents time average
             if np.diff(nc_tbnd[0]) == 0.125: # average 3hrly data to 6hrly
-                nc_time = np.mean([nc_time[1::2],nc_time[:-1:2]], axis=0)
+                nc_ctime = np.mean([nc_ctime[1::2],nc_ctime[:-1:2]], axis=0)
+                print(f"averaging 3hrly PRECT ({len(nc_time)} steps) to 6hrly ({len(nc_ctime)} steps)")
                 nc_prec = np.mean([nc_prec[1::2],nc_prec[:-1:2]], axis=0)
         times = cftime.date2num(timestamp, fh['time'].units, fh['time'].calendar) # convert timestamp to same units
-        print(f"interpolating PRECT from {len(nc_prec)=} to {len(nc_time)=} timestamps")
-        prec = interp1d(nc_time, nc_prec, axis=0, bounds_error=False)(times)
-        if times[0] < nc_time[0] or times[-1] > nc_time[-1]:
-            ids_invalid = (times < nc_time[0]) | (times > nc_time[-1])
+        print(f"interpolating PRECT from {len(nc_ctime)} to {len(times)} timestamps")
+        prec = interp1d(nc_ctime, nc_prec, axis=0, bounds_error=False)(times)
+        if times[0] < nc_tbnd[0,0] or times[-1] > nc_tbnd[-1,1]:
+            ids_invalid = (times < nc_tbnd[0,0]) | (times > nc_tbnd[-1,1])
             prec[ids_invalid] = np.nan
             print(f"\nWARNING: Failed to interpolate PRECT to {times[ids_invalid]=} "
                 + f"(={[str(t) for t in timestamp[ids_invalid]]}), available times: {nc_time=}")
         if track_attrs[11] == '':
             track_attrs[11] = getattstr(fh, 'PRECT')
     return prec
-    
+
 
 def ReadinDataPSLMonth(month, year):
     """Read in the sea-level pressure (monthly)"""
@@ -1504,6 +1561,7 @@ track_all   = np.ma.masked_all((len(track_ID_list), time_max, 13))
 for track_i in range(len(track_ID_list)):
     #Save data to general array
     exec('track = TRACK_ID_'+str(track_ID_list[track_i]))
+    print(f'saving TRACK_ID_{track_i}: {len(track)=}')
     track_all[track_i, :len(track)] = track
     
 track_all[:,:,7:9][track_all[:,:,7:9]==100] = np.nan # missing SST/SSTmon values
