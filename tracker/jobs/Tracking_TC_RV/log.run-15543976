@@ -1,0 +1,15 @@
+/var/spool/slurm/slurmd/job15543976/slurm_script: line 32: 1892423 Killed                  python -u Tracking_TC_RV.py rcp 1 > log.rcp.1 2>&1
+/var/spool/slurm/slurmd/job15543976/slurm_script: line 32: 1892428 Killed                  python -u Tracking_TC_RV.py rcp 6 > log.rcp.6 2>&1
+Job ID: 15543976
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 17-21:41:12 core-walltime
+Job Wall-clock time: 17:54:13
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 42.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
+[2025-10-25T13:17:34.997] error: Detected 2 oom_kill events in StepId=15543976.batch. Some of the step tasks have been OOM Killed.
