@@ -16,7 +16,7 @@ import cartopy.util as cutil
 import cftime
 
 
-def load_tracks(datapath, open_kwargs=None):
+def load_tracks(datapath, ext='.infext', open_kwargs=None):
     if open_kwargs is None:
         open_kwargs = {
             'Reference': ('RCP',2002,'ref'), 
