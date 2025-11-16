@@ -1,27 +1,17 @@
+import sys
+import multiprocessing as mp
 import cartopy.crs as ccrs
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from scipy.interpolate import interp1d
 import xarray as xr
-
 from src.analysis.load_SAIdata import open_mfdataset, Cases
 import src.analysis.tracks as tracks
-
-# parameter settings
-exps = {'ref':'Reference', 'rcp':'RCP8.5', 'sai':'SAI2050'}
-assert len(sys.argv) == 3, 'number of script arguments must be 2'
-experiment = sys.argv[1] # 'ref'
-run_ensemble = sys.argv[2] # 6
-assert experiment in exps, f'choose one of {list(exps)} for experiment'
-Exp = exps[experiment]
-stream, stream_prec = ('h1','h2') if (experiment in ('ref','rcp')) and (run_ensemble <= 5) else ('h5','h3')
-savefile = f'PRECT_sum.{experiment}.{run_ensemble}.nc'
-print(f'{Exp=}, {stream=}, {stream_prec=}, {savefile=}')
 
 
 def read_CAM_prect(experiment, run_ensemble, stream_prec):
     case = Cases(f'hres.{experiment}.{run_ensemble}').select('atm',stream_prec)
-    ds_cam = case.open_mfdataset(decode_times=False)
+    ds_cam = case.open_mfdataset(decode_times=False, cache=False)
     ds_cam = ds_cam.drop_vars(('date_written','time_written'))
     dt = (ds_cam.time[1] - ds_cam.time[0]).item() # time step (days)
     if 'time: mean' in getattr(ds_cam.PRECT, 'cell_methods', ''):
@@ -127,17 +117,37 @@ def interpolate_time(time, da):
     id1 = np.searchsorted(da.time, time)
     id0 = max(id1 - 1, 0)
     da_adj = da.isel(time=slice(id0,id1+1))
-    interped = interp1d(da_adj.time, da_adj, axis=ax)(time)
+    if max(time-da_adj.time[-1], da_adj.time[0]-time) > 0.125:
+        print(f"WARNING: extrapolating to {time=} from {da_adj.time.data}")
+    interped = interp1d(da_adj.time, da_adj, axis=ax, fill_value='extrapolate')(time)
     da_interp = da.isel(time=0)
     da_interp.time.data = time
     da_interp.data = interped
     return da_interp
 
 
-def main():
+def sizeof_fmt(num, suffix='B'):
+    ''' by Fred Cirera,  https://stackoverflow.com/a/1094933/1870254, modified'''
+    for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
+        if abs(num) < 1024.0:
+            return "%3.1f %s%s" % (num, unit, suffix)
+        num /= 1024.0
+    return "%.1f %s%s" % (num, 'Yi', suffix)
+
+
+def main(experiment, run_ensemble):
+    sys.stdout = open(f'log.{experiment}.{run_ensemble}', 'w', buffering=1)
+    sys.stderr = sys.stdout
+    exps = {'ref':'Reference', 'cnt':'RCP8.5', 'sai':'SAI2050'}
+    Exp = exps[experiment]
+    stream, stream_prec = ('h1','h2') if (experiment in ('ref','cnt')) and (run_ensemble <= 5) else ('h5','h3')
+    savefile = f'PRECT_sum.{experiment}.{run_ensemble}.nc'
+    print(f'{Exp=}, {stream=}, {stream_prec=}, {savefile=}')
+    
     ds_cam = read_CAM_prect(experiment, run_ensemble, stream_prec)
     ds_tracks = tracks.load_tracks('../../jobs/Tracking_TC_RV.infext2/', ext='.infext')
     dsi_tracks = ds_tracks[Exp].where(ds_tracks[Exp].ens==run_ensemble, drop=True)  # select tracks for experiment and ensemble
+    
     track_times = get_timestamps(dsi_tracks)
     precip_sum = {}
     dt = 3 * 60 * 60 # time difference (s) between track points
@@ -148,15 +158,14 @@ def main():
                          .rename('PRECT')
                          .assign_coords(year=int(year))
                          .assign_attrs({'name':'PRECT','long_name':'precipitation sum','units':'mm/year'}))
-        for time in timestamps[0:80]:  # loop through time stamps with active TCs
+        for time in timestamps[:]:  # loop through time stamps with active TCs
             if (time - timestamps[0])%1==0:
-                print('\rcurrent day of year:',time-timestamps[0]+1, end=', ')
+                print(f'current doy: {time-timestamps[0]+1}')
             PRECT_step = interpolate_time(time, ds_cam.PRECT) # 6hrly average precipitation (m/s)
             ids = np.nonzero(dsi_tracks.time == time).T  # IDs of active TCs at time step
             mask = join_TC_masks(ids, dsi_tracks, ds_cam, r=5) # mask (Nlat x Nlon), true within r degrees of any TC
             dPRECT = mask.astype('int') * PRECT_step * dt * 1000 # precipitation sum (mm) over 3hr interval between track points
             pcip_sum_year += dPRECT.compute()
-        print('')
         precip_sum[year] = pcip_sum_year.drop_vars(('time','id','dtime'))
     
     # save results
@@ -166,4 +175,11 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #for experiment in ['ref','cnt','sai']:
+    #    for run_ensemble in range(1,7):
+    #        mp.Process(target=main, args=(experiment, run_ensemble)).start()
+    mp.Process(target=main, args=('ref',1)).start()
+    mp.Process(target=main, args=('ref',5)).start()
+    mp.Process(target=main, args=('cnt',3)).start()
+    mp.Process(target=main, args=('cnt',5)).start()
+    #main()
