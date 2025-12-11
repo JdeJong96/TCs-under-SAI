@@ -525,8 +525,8 @@ def histogram(da, bins=np.arange(900,1015,2.5)):
     returns: xr.Dataset
         the histogram count (hcount), bin edges and central bin values
     """
-    assert ('dtime' not in da.dims, 
-            "da must first be reduced, e.g. using track_stat()")
+    assert 'dtime' not in da.dims, (
+        "da must first be reduced, e.g. using track_stat()")
     ensembles = np.unique(da.ens)
     years = np.unique(da.year)
     data = []
