@@ -1,0 +1,57 @@
+generating weights
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.cnt.1.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.cnt.2.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.cnt.3.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.cnt.4.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.cnt.5.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.cnt.6.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.ref.1.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.ref.2.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.ref.3.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.ref.4.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.ref.5.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.ref.6.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.sai.1.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.sai.2.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.sai.3.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.sai.4.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.sai.5.f02_t12.nc
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+writing ./data/SST.hres.sai.6.f02_t12.nc

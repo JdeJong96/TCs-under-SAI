@@ -1,0 +1,7 @@
+generating weights file ./data/remapweights_tx0.1v2_to_f02_t12_conservative.nc
+/gpfs/home2/jasperdj/TCs-under-SAI/analysis/jobs/SST/regridder.py:111: FutureWarning: In a future version of xarray decode_timedelta will default to False rather than None. To silence this warning, set decode_timedelta to True, False, or a 'CFTimedeltaCoder' instance.
+  src = xr.open_dataset(SRC_GRID_FILE) # POP file
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
+/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xesmf/backend.py:57: UserWarning: Latitude is outside of [-90, 90]
+  warnings.warn('Latitude is outside of [-90, 90]')
