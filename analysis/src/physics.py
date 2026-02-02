@@ -50,3 +50,25 @@ def meridional_mass_streamfunction(v, dp, lat):
     })
     result.name = 'MMF'
     return result.astype(v.dtype)
+
+
+def windshear_250_850(ds):
+    """Calculate vertical windshear between 250 and 850 hPa
+
+    input:
+    ds : xr.Dataset
+        dataset containing zonal and meridional wind at 250 and 850 hPa
+
+    returns:
+    xr.DataArray:
+        absolute vertical wind difference between level 1 and 2
+    """
+    
+    vws = np.sqrt((ds.U250 - ds.U850)**2 + (ds.V250 - ds.V850)**2)
+    vws.name = 'VWS'
+    vws = vws.assign_attrs({
+        'units': ds.U250.units,
+        'long_name': 'vertical wind shear between 250 and 850 hPa'
+    })
+
+    return vws

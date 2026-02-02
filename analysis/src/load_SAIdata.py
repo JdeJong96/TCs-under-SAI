@@ -66,7 +66,7 @@ def open_mfdataset(filepaths: list[str], ncstore_dir: str='~/kerchunk', verbose=
         return xr.open_dataset(ncstore_path, **kwargs)
     
     # make new NC_STORE data
-    with xr.open_dataset(filepaths[0]) as ds:
+    with xr.open_dataset(filepaths[0], **kwargs) as ds:
         const_vars = [v for v in ds.variables if 'time' not in ds[v].dims]
     filebag = dask.bag.from_sequence(filepaths, npartitions=None)
     reffiles = (filebag.map(NetCDF3ToZarr, inline_threshold=0, max_chunk_size=0)
