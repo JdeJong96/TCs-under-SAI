@@ -365,13 +365,33 @@ def track_density(ds, xbins=range(0,361,5), ybins=range(-90,91,5)):
     })
 
 
+# def TChoursperday(ds):
+#     """Calculate total TC hours per day in dataset ds"""
+#     out = {}
+#     for ens in np.unique(ds.ens): 
+#         dsi = ds.where(ds.ens==ens, drop=True)#.dropna('id',how='all')
+#         times_in = dsi.time.stack(x=[...]).dropna('x')
+#         times_out = np.arange(times_in.min(), times_in.max()+.1, 0.125)
+#         out[ens] = xr.DataArray(data=np.zeros(times_out.size), 
+#             coords={'time':('time',times_out,dsi.time.attrs)},
+#             name='freq', attrs={'long_name':'TC frequency','units':'TC hours per day'})
+#         vals, counts = np.unique(times_in, return_counts=True)
+#         out[ens][np.searchsorted(out[ens].time, vals)] = counts*3
+#         out[ens] = xr.decode_cf(out[ens].to_dataset()).freq
+#     out = xr.concat(out.values(), 'ens', join='outer', fill_value=0)
+#     out['ens'] = out.ens + 1
+#     out = out.coarsen(time=8, boundary='trim').sum()
+#     return out
+
+
 def TChoursperday(ds):
     """Calculate total TC hours per day in dataset ds"""
     out = {}
-    for ens in np.unique(ds.ens):
+    for ens in np.unique(ds.ens): 
         dsi = ds.where(ds.ens==ens, drop=True)#.dropna('id',how='all')
         times_in = dsi.time.stack(x=[...]).dropna('x')
-        times_out = np.arange(times_in.min(), times_in.max()+.1, 0.125)
+        times_in -= 0.125 # set to start of time bounds
+        times_out = np.arange(times_in.min()//1, times_in.max()//1+1, 0.125)
         out[ens] = xr.DataArray(data=np.zeros(times_out.size), 
             coords={'time':('time',times_out,dsi.time.attrs)},
             name='freq', attrs={'long_name':'TC frequency','units':'TC hours per day'})
