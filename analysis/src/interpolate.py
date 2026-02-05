@@ -99,6 +99,54 @@ def interpolate(da, p, pi, dim, chunks={}):
     return interped
 
 
+@guvectorize(
+    "(float32[:], float64[:], float64, float64, float64[:])",
+    " (n), (m), (), () -> ()",
+    nopython=True, target='parallel'
+)
+def integrate1d_gu(f, pi, p_min, p_max, out):
+    """Vertically integrate field f from p_min to p_max in pressure coordinates."""
+    out[0] = 0.0
+    nlev = len(f)
+    for k in range(nlev):
+        p_bnd = pi[k], pi[k+1]
+        dp = min(p_bnd[1],p_max) - max(p_bnd[0],p_min)
+        if dp <= 0:
+            continue
+        out[0] += f[k] * dp
+
+
+def integrate(da, pi, p_min, p_max, da_dim='lev', pi_dim='ilev'):
+    """Apply 1D integration function on xarray objects
+
+    input:
+    da : xr.DataArray[float32], shape lev
+        field to integrate
+    pi : xr.DataArray[float64], shape lev + 1
+        pressure at vertical cell interfaces
+        (e.g. pi = pressure_from_hybrid(ds, cell_interface=True))
+    p_min : float64
+        lower integration limit of pressure
+    p_max : float64
+        upper integration limit of pressure
+    da_dim : Str
+        vertical dimension in da
+    pi_dim : Str
+        vertical dimension in pi
+
+    returns:
+    xr.DataArray[float32]
+        integral of da dp between p_min and p_max.
+    """
+    return xr.apply_ufunc(
+        integrate1d_gu, da, pi, p_min, p_max,
+        input_core_dims=[[da_dim],[pi_dim],[],[]],
+        output_core_dims=[[]],
+        dask='parallelized',
+        on_missing_core_dim='drop'
+    )
+
+
 def main(ds):
     """Divide data into chunks, interpolate and average"""
     ds = ds.stack(x=('ens','time'))
