@@ -36,6 +36,3 @@ for file in *.nc
 do 
     ncdump $file > ${file}dump
 done
-
-# job statistics
-seff $SLURM_JOB_ID
