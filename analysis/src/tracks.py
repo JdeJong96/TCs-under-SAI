@@ -37,7 +37,89 @@ domains = {k:sgeom.Polygon(v) for k,v in {
 }.items()}
 
 
+def load_track_file(filename):
+    """load single track dataset and optionally assign ensemble number n"""
+    ds = xr.open_dataset(filename, decode_cf=False)
+    #ds = (ds.assign_coords(ens=('id',np.ones(ds.id.size)*n,{'long_name':'ensemble member'})))
+    times = ds.TC_tracks.isel(data=0)
+    #print(f'{tag.upper()}.00{n}: {ds.num_days/365:.3f} years, {len(ds.id)} tracks')
+
+    for i,(desc) in enumerate(ds.data.description):
+        shortname = desc[:desc.index(':')]
+        ds[shortname] = ds.TC_tracks.isel(data=i).assign_attrs(
+            ast.literal_eval(desc[desc.index(':')+1:]))
+        ds[shortname].data[ds[shortname]>1e30] = np.nan
+    time = ds.time.copy()
+    time -= 0.0625 # set to center of CESM time bounds (only for year determination)
+    tmask = np.isnan(time)
+    time.data = cftime.num2date(time.fillna(0), time.units, time.calendar)
+    ds['year'] = time.dt.year.where(~tmask, np.nan)
+    ds['PRECT'].data = ds['PRECT']*3.6e6 # m/s to mm/hour
+    ds['PRECT'].attrs.update({'units':'mm/hour'})
+    return ds
+
+
+# def load_tracks(datapath, ext='.infext', open_kwargs=None):
+#     if open_kwargs is None:
+#         open_kwargs = {
+#             'Reference': ('RCP',2002,'ref'), 
+#             'RCP8.5': ('RCP',2092,'rcp'), 
+#             'SAI2050': ('SAI',2092,'sai')
+#         }
+    
+#     ds = {exp: [] for exp in open_kwargs}
+#     for exp, (name, year, tag) in open_kwargs.items():
+#         maxtn = 0
+#         num_days = 0
+#         for n in range(1,7):
+#             fname = f'TC_tracks.{tag}.00{n}{ext}.nc'
+#             fname = os.path.join(datapath, fname)
+#             if os.path.exists(fname):
+#                 dsi = xr.open_dataset(fname, decode_cf=False)
+#                 dsi = (dsi.assign_coords(id=('id',dsi.id.data+maxtn,dsi.id.attrs))
+#                        .assign_coords(ens=('id',np.ones(dsi.id.size)*n,{'long_name':'ensemble member'})))
+#                 ds[exp].append(dsi)
+#                 maxtn = dsi.id.max().item()
+#                 times = dsi.TC_tracks.isel(data=0)
+#                 num_days += dsi.num_days
+#                 print(f'{tag.upper()}.00{n}: {dsi.num_days/365:.3f} years, {len(dsi.id)} tracks')
+#             else:
+#                 print(f'no file named {fname}')
+#         ds[exp] = xr.concat(ds[exp], data_vars='minimal', dim='id', join='outer')
+#         ds[exp]['num_days'] = num_days.assign_attrs({'long_name':'total number of analysed days'})
+    
+#     for k,v in ds.items():
+#         for i,(desc) in enumerate(v.data.description):
+#             shortname = desc[:desc.index(':')]
+#             v[shortname] = v.TC_tracks.isel(data=i).assign_attrs(
+#                 ast.literal_eval(desc[desc.index(':')+1:]))
+#             v[shortname].data[v[shortname]>1e30] = np.nan
+#         time = v.time.copy()
+#         time -= 0.0625 # set to center of CESM time bounds (only for year determination)
+#         tmask = np.isnan(time)
+#         time.data = cftime.num2date(time.fillna(0), time.units, time.calendar)
+#         v['year'] = time.dt.year.where(~tmask, np.nan)
+#         v['PRECT'].data = v['PRECT']*3.6e6 # m/s to mm/hour
+#         v['PRECT'].attrs.update({'units':'mm/hour'})
+
+#     return ds
+
+
 def load_tracks(datapath, ext='.infext', open_kwargs=None):
+    """load TC (seed) track data
+    
+    track files should be formatted like TC_tracks.{tag}.00{n}{ext}.nc,
+    where tag is either [ref, rcp, sai], n is the ensemble member {1..6}, and
+    ext an optional filename extension, e.g. .seeds2, .24hrext2, .infext2, ...
+
+    datapath: Str
+        job directory containing track files
+    ext: Str
+        filename extension, e.g. .seeds2, .24hrext2, .infext2 (see job dirs)
+    open_kwargs: dict[tuple]
+        file name parts (first two of three elements not needed anymore)
+        
+    """
     if open_kwargs is None:
         open_kwargs = {
             'Reference': ('RCP',2002,'ref'), 
@@ -63,7 +145,16 @@ def load_tracks(datapath, ext='.infext', open_kwargs=None):
                 print(f'{tag.upper()}.00{n}: {dsi.num_days/365:.3f} years, {len(dsi.id)} tracks')
             else:
                 print(f'no file named {fname}')
-        ds[exp] = xr.concat(ds[exp], data_vars='minimal', dim='id', join='outer')
+
+        max_len = max(dsi.dtime.size for dsi in ds[exp])
+        for i in range(len(ds[exp])):
+            dsi = ds[exp][i]
+            pad_len = max_len - dsi.dtime.size
+            if pad_len > 0:
+                dsi = dsi.pad(dtime=(0, pad_len), 
+                              constant_values=dsi.TC_tracks._FillValue)
+                ds[exp][i] = dsi.assign_coords(dtime=np.arange(max_len)*0.125)
+        ds[exp] = xr.concat(ds[exp], dim='id', data_vars='minimal', coords='minimal', join='override')
         ds[exp]['num_days'] = num_days.assign_attrs({'long_name':'total number of analysed days'})
     
     for k,v in ds.items():
