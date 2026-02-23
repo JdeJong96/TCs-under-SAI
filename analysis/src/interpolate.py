@@ -15,6 +15,18 @@ import cartopy.crs as ccrs
 import numpy as np
 from numba import float32, float64, guvectorize
 
+# pressure levels [Pa] with similar resolution to original data
+# see also analysis/notebooks/pres_levels.ipynb
+PLEV = np.array([
+    364.346569404006, 759.481964632869, 1435.6632251292501, 2461.22200042009, 
+    3826.82997733355, 5459.54797416925, 7201.24505460262, 8782.123029232029, 
+    10331.712663173701, 12154.7240763903, 14299.403876066199, 16822.5079774857, 
+    20000.0, 22500.0, 25000.0, 30000.0, 35000.0, 40000.0, 45000.0, 50000.0, 
+    55000.0, 60000.0, 65000.0, 70000.0, 75000.0, 80000.0, 85000.0, 87500.0, 
+    90000.0, 92500.0, 95000.0, 97000.0, 98500.0, 100000.0
+])
+
+
 def pressure_from_hybrid(ds, cell_interface=False):
     """Calculate atmospheric pressure from hybrid coefficients
 
