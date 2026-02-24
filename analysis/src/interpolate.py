@@ -72,12 +72,12 @@ def interp1d_gu(f, x, xi, out):
         i = i + 1
 
 
-def interpolate(da, p, pi, dim, chunks={}):
+def interpolate(da, p, pi, dim, chunks={}, **kwargs):
     """Apply 1D interpolation function on xarray objects
 
     input:
-    da : xr.DataArray
-        field to interpolate
+    da : xr.DataArray | xr.Dataset
+        field(s) to interpolate
     p : xr.DataArray
         pressure
     pi : ArrayLike
@@ -86,6 +86,8 @@ def interpolate(da, p, pi, dim, chunks={}):
         dimension used for interpolation
     chunks : dict
         passed to da.chunk. if empty, existing chunks are retained
+    kwargs : dict
+        optional keyword arguments for xr.apply_ufunc
 
     returns:
     xr.DataArray
@@ -104,9 +106,11 @@ def interpolate(da, p, pi, dim, chunks={}):
         output_core_dims=[pi.dims],
         exclude_dims=set((dim,)),
         dask='parallelized',
-        on_missing_core_dim='drop'
+        **kwargs,
     ).transpose(*dims).assign_coords({pi.name:pi}).assign_attrs(da.attrs)
-    interped.name = da.name
+    
+    if isinstance(interped, xr.DataArray):
+        interped.name = da.name
 
     return interped
 
@@ -128,7 +132,7 @@ def integrate1d_gu(f, pi, p_min, p_max, out):
         out[0] += f[k] * dp
 
 
-def integrate(da, pi, p_min, p_max, da_dim='lev', pi_dim='ilev'):
+def integrate(da, pi, p_min, p_max, da_dim='lev', pi_dim='ilev', **kwargs):
     """Apply 1D integration function on xarray objects
 
     input:
@@ -155,7 +159,7 @@ def integrate(da, pi, p_min, p_max, da_dim='lev', pi_dim='ilev'):
         input_core_dims=[[da_dim],[pi_dim],[],[]],
         output_core_dims=[[]],
         dask='parallelized',
-        on_missing_core_dim='drop'
+        **kwargs,
     )
 
 
