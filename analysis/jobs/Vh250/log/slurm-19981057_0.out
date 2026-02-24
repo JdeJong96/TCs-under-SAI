@@ -1,0 +1,4 @@
+tag='hres.ref.1'
+Reading combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.001.cam2.h1.2002-12-01-10800_2012-12-31-10800.json
+groupby month
+writing to ./data/Vh250.hres.ref.1.nc
