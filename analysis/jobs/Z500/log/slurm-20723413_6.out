@@ -1,0 +1,14 @@
+tag='hres.cnt.1'
+Traceback (most recent call last):
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/jobs/Z500/Z500.py", line 88, in <module>
+    main()
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/jobs/Z500/Z500.py", line 69, in main
+    ds = open_ds_mon_atm(exp, ens, chunks={})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/jobs/Z500/Z500.py", line 49, in open_ds_mon_atm
+    .select('atm','h0')
+     ^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 177, in select
+    self.files = self.files[comp][stream]
+                 ~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'h0'
