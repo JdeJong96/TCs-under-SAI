@@ -3,6 +3,8 @@
 import numpy as np
 import xarray as xr
 
+GRIDFILE = '../../../tracker/data/Atmosphere_0_25_DX_DY_AREA.nc'
+
 A = 6371000 # radius earth [m]
 PI = np.pi  # pi
 G = 9.81    # acceleration due to gravity [m/s^2]
@@ -72,3 +74,31 @@ def windshear_250_850(ds):
     })
 
     return vws
+
+
+def relative_vorticity_850(ds, gridfile=GRIDFILE):
+    """Calculate relative vorticity at 850 hPa
+
+    input:
+    ds : xr.Dataset
+        dataset containing zonal and meridional wind in m/s at 850 hPa
+    gridfile : Str
+        filename (path) of file containing grid distances
+
+    returns:
+    xr.DataArray:
+        relative vorticity at 850 hPa [1/s]
+    """
+    assert ds.U850.units == 'm/s', f'{ds.U850.units=}, expected m/s'
+    grid = xr.open_dataset(gridfile)
+
+    dUdy = (ds.U850.shift(lat=-1) - ds.U850.shift(lat=1)) / (grid.DY * 2)
+    dVdx = (ds.V850.roll(lon=-1) - ds.V850.roll(lon=1)) / (grid.DX * 2)
+    RV850 = ((dVdx - dUdy)
+             .assign_attrs(
+                 {'units': '1/s', 'long_name':'850 hPa relative vorticity'})
+             .astype(ds.U850.dtype)
+            )
+    RV850.name = 'RV850'
+    
+    return RV850
