@@ -1,0 +1,41 @@
+tag='hres.ref.1'
+Writing combined kerchunk reference file /home/jasperdj/kerchunk/b.e10.B_RCP8.5_CO2_CAM5.f02_t12.started_2002-12.001.cam2.h0.2002-12_2007-12.json
+Traceback (most recent call last):
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/jobs/PRECT/PRECT.py", line 86, in <module>
+    main()
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/jobs/PRECT/PRECT.py", line 69, in main
+    ds = open_ds_mon_atm(exp, ens, chunks={})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/jobs/PRECT/PRECT.py", line 48, in open_ds_mon_atm
+    Cases(f'hres.{exp}.{ens}')
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 188, in open_mfdataset
+    return open_mfdataset(self.files, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home2/jasperdj/TCs-under-SAI/analysis/src/load_SAIdata.py", line 71, in open_mfdataset
+    with xr.open_dataset(filepaths[0], **kwargs) as ds:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/xarray/backends/api.py", line 687, in open_dataset
+    backend_ds = backend.open_dataset(
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 13, in open_dataset
+    ref_ds = open_reference_dataset(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/xarray_backend.py", line 45, in open_reference_dataset
+    store = refs_as_store(filename_or_obj, **storage_options)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 48, in refs_as_store
+    fss = refs_as_fs(
+          ^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/kerchunk/utils.py", line 29, in refs_as_fs
+    fs = fsspec.filesystem(
+         ^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/registry.py", line 310, in filesystem
+    return cls(**storage_options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/spec.py", line 81, in __call__
+    obj = super().__call__(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jasperdj/miniconda3/envs/geo/lib/python3.12/site-packages/fsspec/implementations/reference.py", line 705, in __init__
+    text = json.load(f)
+           ^^^^^^^^^^^^
+ujson.JSONDecodeError: Expected object or value
