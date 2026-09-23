@@ -6,7 +6,7 @@ Tracking of tropical cyclones in CESM data broadly follows the following two-sta
 ### General
 This directory contains the TC tracker source code and generated TC (seed) track data used for the SAI impact study. The directory is structured as follows:
 
-- `additional` 
+- `additional` early attempts for improving TC precipitation data, not used in final study
 - `doc` list of useful references
 - `jobs` generated track datasets, a set of jobs created with the final version of the tracker is:
   - `Tracking_TC_RV.24hrext2` TC tracks with 24 hour extension
